@@ -1,0 +1,3 @@
+pdays,failure,other,success,unknown
+pdays = -1,0,0,0,36954
+pdays >= 1,4901,1840,1511,5
