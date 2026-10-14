@@ -1,0 +1,38 @@
+name: ci
+on:
+  - push
+  - pull_request
+
+# Environment
+env:
+  CI: true
+  PYTHON_VERSION: 3.12
+
+# mkdocs gh-deploy pushes the built site to the gh-pages branch
+permissions:
+  contents: write
+
+# Jobs to run
+jobs:
+
+  # Build and deploy documentation site
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checkout source from GitHub
+      - uses: actions/checkout@v4
+
+      # Install Python runtime and dependencies
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # pip (site only; the analysis dependencies are in requirements.txt)
+      - run: |
+          pip install -r requirements-docs.txt
+
+      # deploy
+      - run: |
+          mkdocs gh-deploy --force

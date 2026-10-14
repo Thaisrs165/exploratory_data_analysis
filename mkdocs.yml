@@ -1,0 +1,91 @@
+site_name: Exploratory Data Analysis 26.2
+site_description: Classification and regression EDAs for Insper's Artificial Neural Networks and Deep Learning, 2026.2
+site_author: Ana Helena Caiafa, Thais Rocha, Esther Caroline Rodrigues, Carolina Eskenazi
+site_url: https://thaisrs165.github.io/exploratory_data_analysis/
+repo_url: https://github.com/Thaisrs165/exploratory_data_analysis
+repo_name: Thaisrs165/exploratory_data_analysis
+edit_uri: blob/main/docs/
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: grey
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: grey
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: grey
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: grey
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to system preference
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.tooltips
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.top
+    - navigation.path
+    - navigation.tracking
+    - navigation.expand
+    - toc.follow
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - glightbox:
+      skip_classes:
+        - team-photo
+
+extra_css:
+  - stylesheets/extra.css
+
+# part1_draft.md is an intermediate file: its content is already inside the
+# classification report (stages 0-3), so it is not published.
+exclude_docs: |
+  projects/eda/part1_draft.md
+
+nav:
+  - Home: index.md
+  - Classification - Bank Marketing: projects/eda/index.md
+  - Regression - Seoul Bike Sharing: projects/eda-regression/index.md
