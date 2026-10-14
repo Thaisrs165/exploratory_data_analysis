@@ -32,7 +32,7 @@ Project for Insper's **Artificial Neural Networks and Deep Learning**, semester 
 
 <div class="grid cards" markdown>
 
--   **[Classification — UCI Bank Marketing](projects/eda/index.md)**
+-   **[Classification — UCI Bank Marketing](projects/eda/stage-0.md)**
 
     ---
 
@@ -43,7 +43,9 @@ Project for Insper's **Artificial Neural Networks and Deep Learning**, semester 
     - `duration` dropped as target leakage
     - Stratified 80/20 split; 51 features after the pipeline
 
--   **[Regression — UCI Seoul Bike Sharing Demand](projects/eda-regression/index.md)**
+    [:octicons-arrow-right-24: Start reading](projects/eda/stage-0.md) · [Full report on one page](projects/eda/index.md)
+
+-   **[Regression — UCI Seoul Bike Sharing Demand](projects/eda-regression/stage-0.md)**
 
     ---
 
@@ -54,9 +56,11 @@ Project for Insper's **Artificial Neural Networks and Deep Learning**, semester 
     - Closed hours removed as target leakage
     - Split by whole days, stratified by season; 22 features after the pipeline
 
+    [:octicons-arrow-right-24: Start reading](projects/eda-regression/stage-0.md) · [Full report on one page](projects/eda-regression/index.md)
+
 </div>
 
-Both reports follow the same stages from the assignment:
+Both reports follow the same stages from the assignment. Each stage is its own page (use the tabs at the top and **Next** at the bottom of each page), and each report is also available on a single page:
 
 | Stage | Content |
 |---|---|

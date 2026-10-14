@@ -44,6 +44,8 @@ theme:
     - content.tooltips
     - navigation.instant
     - navigation.instant.progress
+    - navigation.tabs
+    - navigation.footer
     - navigation.top
     - navigation.path
     - navigation.tracking
@@ -71,6 +73,10 @@ markdown_extensions:
   - toc:
       permalink: true
 
+# Splits each report into one page per stage at build time (reports unchanged)
+hooks:
+  - hooks/split_reports.py
+
 plugins:
   - search
   - glightbox:
@@ -87,5 +93,21 @@ exclude_docs: |
 
 nav:
   - Home: index.md
-  - Classification - Bank Marketing: projects/eda/index.md
-  - Regression - Seoul Bike Sharing: projects/eda-regression/index.md
+  - Classification:
+    - "0. Proposal": projects/eda/stage-0.md
+    - "1. Initial inspection": projects/eda/stage-1.md
+    - "2. Univariate analysis": projects/eda/stage-2.md
+    - "3. Bivariate & multivariate": projects/eda/stage-3.md
+    - "4. Preprocessing": projects/eda/stage-4.md
+    - "5. Synthesis": projects/eda/stage-5.md
+    - Reproducibility: projects/eda/appendix.md
+    - Full report (one page): projects/eda/index.md
+  - Regression:
+    - "0. Proposal": projects/eda-regression/stage-0.md
+    - "1. Initial inspection": projects/eda-regression/stage-1.md
+    - "2. Univariate analysis": projects/eda-regression/stage-2.md
+    - "3. Bivariate & multivariate": projects/eda-regression/stage-3.md
+    - "4. Preprocessing": projects/eda-regression/stage-4.md
+    - "5. Synthesis": projects/eda-regression/stage-5.md
+    - Reproducibility: projects/eda-regression/appendix.md
+    - Full report (one page): projects/eda-regression/index.md
