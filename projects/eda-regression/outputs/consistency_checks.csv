@@ -1,0 +1,11 @@
+,rows
+hour outside 0-23,0
+humidity outside 0-100,0
+humidity == 0,17
+negative wind/visibility/solar/rain/snow,0
+dew_point > temperature,0
+solar_radiation > 0 between 22h and 4h,0
+snowfall > 0 with temperature > 5 °C,14
+season inconsistent with month,0
+visibility at the 2000 (20 km) ceiling,2245
+rented_bike_count == 0,295

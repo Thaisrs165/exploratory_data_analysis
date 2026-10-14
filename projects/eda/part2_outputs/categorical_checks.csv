@@ -1,0 +1,10 @@
+feature,NaN (train),"""unknown"" rows (train)","""unknown"" % (train)",levels (train),test levels unseen in train
+`job`,0,234,0.6469807564698076,12,0
+`marital`,0,0,0.0,3,0
+`education`,0,1482,4.097544790975448,4,0
+`default`,0,0,0.0,2,0
+`housing`,0,0,0.0,2,0
+`loan`,0,0,0.0,2,0
+`contact`,0,10386,28.71599203715992,3,0
+`month`,0,0,0.0,12,0
+`poutcome`,0,29589,81.80988719309887,4,0

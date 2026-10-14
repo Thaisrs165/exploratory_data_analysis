@@ -1,0 +1,2114 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Classification and regression EDAs for Insper's Artificial Neural Networks and Deep Learning, 2026.2">
+      
+      
+        <meta name="author" content="Ana Helena Caiafa, Thais Rocha, Esther Caroline Rodrigues, Carolina Eskenazi">
+      
+      
+        <link rel="canonical" href="https://thaisrs165.github.io/exploratory_data_analysis/projects/eda/stage-4/">
+      
+      
+        <link rel="prev" href="../stage-3/">
+      
+      
+        <link rel="next" href="../stage-5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Classification: 4. Preprocessing - Exploratory Data Analysis 26.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-preprocessing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Exploratory Data Analysis 26.2" class="md-header__button md-logo" aria-label="Exploratory Data Analysis 26.2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Exploratory Data Analysis 26.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Classification: 4. Preprocessing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_3" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Thaisrs165/exploratory_data_analysis" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Thaisrs165/exploratory_data_analysis
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../stage-0/" class="md-tabs__link">
+          
+  
+  
+  Classification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../eda-regression/stage-0/" class="md-tabs__link">
+          
+  
+  
+  Regression
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Exploratory Data Analysis 26.2" class="md-nav__button md-logo" aria-label="Exploratory Data Analysis 26.2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Exploratory Data Analysis 26.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Thaisrs165/exploratory_data_analysis" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Thaisrs165/exploratory_data_analysis
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Initial inspection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Univariate analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bivariate &amp; multivariate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#4a-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4A. Strategies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4A. Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorical-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Categorical encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4b-dimensionality-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4B. Dimensionality reduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4B. Dimensionality reduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-sne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        t-SNE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UMAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-t-sne-and-umap-reveal-relative-to-pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What t-SNE and UMAP reveal relative to PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4c-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4C. Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full report (one page)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Regression
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Initial inspection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Univariate analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bivariate &amp; multivariate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full report (one page)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#4a-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4A. Strategies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4A. Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorical-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Categorical encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4b-dimensionality-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4B. Dimensionality reduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4B. Dimensionality reduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-sne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        t-SNE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UMAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-t-sne-and-umap-reveal-relative-to-pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What t-SNE and UMAP reveal relative to PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4c-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4C. Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../stage-0/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Classification
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-preprocessing">4. Preprocessing<a class="headerlink" href="#4-preprocessing" title="Permanent link">¶</a></h1>
+<div class="admonition tip">
+<p>Classification EDA, section 5 of 7. Use <strong>Next</strong> at the bottom to keep reading, or open the <a href="../">full report on one page</a>.</p>
+</div>
+<p>Everything in this stage is implemented in <code>code/bank_preprocessing.py</code> (a scikit-learn <code>Pipeline</code> + <code>ColumnTransformer</code>) and run by <code>scripts/part2_eda.py</code>. The intended model is a neural network, which needs a dense, fully numerical input on comparable scales.</p>
+<p><strong>Consistency with Part 1.</strong> Before anything is fitted, the script recomputes 25 quantities from the raw file and stops if any differs from the values saved by Part 1 (<code>part1_outputs/</code>). All agree; the full list is in the Appendix. In particular, the split is the one from 1D, row for row: train 36,168 rows, test 9,043 rows.</p>
+<p><strong>No fitting on test data.</strong> Clip bounds, the Yeo-Johnson parameter, means, standard deviations and one-hot levels are learned by <code>fit(X_train)</code>. The test set only goes through <code>transform</code>. PCA, t-SNE and UMAP (4B) use training rows only.</p>
+<h2 id="4a-strategies">4A. Strategies<a class="headerlink" href="#4a-strategies" title="Permanent link">¶</a></h2>
+<p>Each choice below starts from a check on the data and from a finding of Part 1.</p>
+<h3 id="missing-values">Missing values<a class="headerlink" href="#missing-values" title="Permanent link">¶</a></h3>
+<p><strong>Check.</strong> There are 0 <code>NaN</code> values in the training predictors and 0 in the test predictors (Part 1, 1B: 0 in the whole file). So there is <strong>nothing to impute</strong> in this dataset.</p>
+<p><strong>Table 4.1 - Categorical checks before encoding (training set; last column compares with the test set).</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">feature</th>
+<th style="text-align: right;">NaN (train)</th>
+<th style="text-align: right;">"unknown" rows (train)</th>
+<th style="text-align: right;">"unknown" % (train)</th>
+<th style="text-align: right;">levels (train)</th>
+<th style="text-align: right;">test levels unseen in train</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>job</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">234</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>marital</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>education</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1482</td>
+<td style="text-align: right;">4.10</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>default</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>housing</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>loan</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contact</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10386</td>
+<td style="text-align: right;">28.72</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>month</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>poutcome</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">29589</td>
+<td style="text-align: right;">81.81</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Strategy.</strong></p>
+<ul>
+<li><strong><code>"unknown"</code> stays a category.</strong> Part 1 (1B) showed that it is not missing at random: for <code>poutcome</code> it marks clients who were never contacted, for <code>contact</code> it marks the early period of the file, and its subscription rate differs (4.1% for <code>contact = unknown</code> against 14.8% for <code>cellular</code>, Figure 8). Replacing it with the mode would erase that signal, so it is one-hot encoded like any other level.</li>
+<li><strong><code>pdays = -1</code> is treated as "not applicable", not as a number.</strong> Part 1 (1B, Figure 7) showed that <code>-1</code> is a code for "not previously contacted" and coincides exactly with <code>previous = 0</code>. The pipeline replaces <code>-1</code> by a missing value, standardises <code>pdays</code> with the mean and standard deviation of <strong>previously contacted training clients only</strong> (225.09 and 115.32 days, n = 6,584), then fills the masked rows with 0 and adds the indicator column <code>missingindicator_pdays</code>. The value 0 is the contacted-client mean, so it is neutral, and the indicator carries the "not previously contacted" information that Part 1 asked to preserve. In the training set the indicator is 1 for 29,584 rows (81.80%).</li>
+<li><strong>Imputers are safeguards.</strong> The pipeline still contains a median imputer for the numerical features and a constant <code>"unknown"</code> imputer for the categorical ones, fitted on the training set. They change <strong>0 values</strong> here. They exist so that <code>transform</code> does not fail if future data contains a <code>NaN</code>. A <code>NaN</code> in a categorical feature would join the existing <code>"unknown"</code> level, which is consistent with the decision above.</li>
+</ul>
+<h3 id="outliers">Outliers<a class="headerlink" href="#outliers" title="Permanent link">¶</a></h3>
+<p><strong>Check.</strong> Part 1 (2A, Figure 3) counted 1.5 x IQR outliers in the training set: <code>balance</code> 3,770 (10.42%), <code>campaign</code> 2,465, and for <code>pdays</code>/<code>previous</code> an artifact of the sentinel. No value was impossible (1B), so Part 1 removed no rows and recommended caps or transforms fitted on train. Expressed as z-scores of the raw training values, the extremes reach 32.8 (<code>balance</code>), 19.4 (<code>campaign</code>) and 113.9 (<code>previous</code>) standard deviations. Inputs of that size would dominate the gradients of a neural network.</p>
+<p><strong>Strategy: clip (winsorise), then transform. No row is removed.</strong></p>
+<ul>
+<li><code>balance</code>, <code>campaign</code> and <code>previous</code> are clipped to the <strong>1st and 99th percentiles of the training set</strong>. For the two counts the 1st percentile equals the minimum, so only the upper tail is clipped.</li>
+<li><code>balance</code> then goes through a Yeo-Johnson power transform (fitted lambda 0.818). It is used instead of a logarithm because -626.33 is negative: overdrawn accounts are valid (1B).</li>
+<li><code>campaign</code> and <code>previous</code> are counts, so they get <code>log1p</code>. This matches Part 1's finding that the signal of <code>campaign</code> is in the tail and has diminishing returns (Figure 13).</li>
+<li><strong>Why clipping is needed, not only a transform.</strong> Yeo-Johnson on the unclipped <code>balance</code> still leaves standardised values between -33.8 and 21.1. After clipping the range is -3.32 to 4.16.</li>
+<li><code>age</code> and <code>day</code> are not clipped. <code>age</code> is only mildly skewed (0.69) and its extremes are informative: clients aged 60+ subscribe at 33.7% against 9.8% for ages 30-59 (Figure 11). <code>day</code> has no outliers (Figure 3).</li>
+<li><code>pdays</code> is not clipped. Once the sentinel is masked, it has few outliers among contacted clients (2A) and its standardised range is -1.94 to 5.60.</li>
+</ul>
+<p><strong>Table 4.2 - Rows changed by clipping.</strong> Bounds are learned on the training set and applied unchanged to the test set.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">feature</th>
+<th style="text-align: right;">lower bound (train P1)</th>
+<th style="text-align: right;">upper bound (train P99)</th>
+<th style="text-align: right;">train rows below</th>
+<th style="text-align: right;">train rows above</th>
+<th style="text-align: right;">train rows clipped</th>
+<th style="text-align: right;">train %</th>
+<th style="text-align: right;">test rows clipped</th>
+<th style="text-align: right;">test %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>balance</code></td>
+<td style="text-align: right;">-626.33</td>
+<td style="text-align: right;">13,161.32</td>
+<td style="text-align: right;">362</td>
+<td style="text-align: right;">362</td>
+<td style="text-align: right;">724</td>
+<td style="text-align: right;">2.00</td>
+<td style="text-align: right;">184</td>
+<td style="text-align: right;">2.03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>campaign</code></td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">16.33</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">362</td>
+<td style="text-align: right;">362</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>previous</code></td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">9.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">296</td>
+<td style="text-align: right;">296</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">0.72</td>
+</tr>
+<tr>
+<td style="text-align: left;">any of the three</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">1,372</td>
+<td style="text-align: right;">3.79</td>
+<td style="text-align: right;">333</td>
+<td style="text-align: right;">3.68</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1,372 training rows (3.79%) have at least one clipped value</strong>, and 333 test rows (3.68%). Clipped training rows subscribe at 10.1%, against 11.8% for the others. Clipping keeps their rank at the top of the scale but removes the distinction among them, which is the cost of this strategy.</p>
+<h3 id="categorical-encoding">Categorical encoding<a class="headerlink" href="#categorical-encoding" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>One-hot encoding</strong> with <code>OneHotEncoder(handle_unknown="ignore")</code>, with no reference level dropped. Part 1 (2B, Figure 5) found low cardinality: at most 12 levels per feature and 44 levels in total. The features are nominal (<code>month</code> is cyclical and <code>education</code> has an <code>unknown</code> level), so integer codes would impose an order that the data does not have.</li>
+<li><strong>Unseen categories.</strong> The test set contains 0 levels that are absent from the training set (Table 4.1). <code>handle_unknown="ignore"</code> is still set: a level that appears later is encoded as all zeros for that feature instead of raising an error. This matters most for the rare levels found in Part 1 (<code>job</code>: unknown; <code>month</code>: dec).</li>
+<li>No level is dropped because a neural network does not need a reference category, and dropping one would make the all-zeros row of an unseen level indistinguishable from the reference level.</li>
+<li>Rare levels are not grouped. Part 1 suggested grouping only if a model overfits, which cannot be judged before modelling.</li>
+</ul>
+<h3 id="scaling">Scaling<a class="headerlink" href="#scaling" title="Permanent link">¶</a></h3>
+<p><strong>Choice: standardisation (zero mean, unit variance), fitted on the training set, applied after clipping and transforming.</strong></p>
+<ul>
+<li>A neural network is trained by gradient descent on weighted sums of its inputs. Features on very different scales (<code>balance</code> in thousands of euros, <code>campaign</code> in single units) give badly conditioned gradients and make one learning rate unsuitable for all weights. Standard weight initialisation also assumes inputs centred near zero with variance near one.</li>
+<li><strong>Min-max scaling was not chosen</strong> because the maximum would be set by the tail: the bulk of <code>balance</code> would be squeezed into a small part of [0, 1].</li>
+<li><strong>Robust scaling alone was not chosen</strong> because it centres and scales by median and IQR but leaves the extremes large. Clipping bounds the tails, and after that the mean and standard deviation are no longer dominated by a few points (the concern raised in 2A).</li>
+<li>One-hot columns and the indicator stay as 0/1. They are already bounded and on a scale comparable to standardised features.</li>
+</ul>
+<p><strong>Table 4.3 - Numerical features before and after the pipeline (training set, except the last two columns).</strong> "Raw min z / max z" are the z-scores the raw values would have with plain standardisation.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">feature</th>
+<th style="text-align: left;">treatment</th>
+<th style="text-align: right;">raw skew</th>
+<th style="text-align: right;">raw min z</th>
+<th style="text-align: right;">raw max z</th>
+<th style="text-align: right;">output mean</th>
+<th style="text-align: right;">output std</th>
+<th style="text-align: right;">output skew</th>
+<th style="text-align: right;">output min</th>
+<th style="text-align: right;">output max</th>
+<th style="text-align: right;">test output min</th>
+<th style="text-align: right;">test output max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>age</code></td>
+<td style="text-align: left;">standardise</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">-2.15</td>
+<td style="text-align: right;">5.09</td>
+<td style="text-align: right;">-0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">-2.15</td>
+<td style="text-align: right;">5.09</td>
+<td style="text-align: right;">-2.15</td>
+<td style="text-align: right;">4.90</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>day</code></td>
+<td style="text-align: left;">standardise</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">-1.78</td>
+<td style="text-align: right;">1.82</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">-1.78</td>
+<td style="text-align: right;">1.82</td>
+<td style="text-align: right;">-1.78</td>
+<td style="text-align: right;">1.82</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>balance</code></td>
+<td style="text-align: left;">clip P1-P99, Yeo-Johnson, standardise</td>
+<td style="text-align: right;">8.34</td>
+<td style="text-align: right;">-3.06</td>
+<td style="text-align: right;">32.84</td>
+<td style="text-align: right;">-0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.03</td>
+<td style="text-align: right;">-3.32</td>
+<td style="text-align: right;">4.16</td>
+<td style="text-align: right;">-3.32</td>
+<td style="text-align: right;">4.16</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>campaign</code></td>
+<td style="text-align: left;">clip P1-P99, log1p, standardise</td>
+<td style="text-align: right;">4.94</td>
+<td style="text-align: right;">-0.57</td>
+<td style="text-align: right;">19.41</td>
+<td style="text-align: right;">-0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.16</td>
+<td style="text-align: right;">-0.93</td>
+<td style="text-align: right;">3.40</td>
+<td style="text-align: right;">-0.93</td>
+<td style="text-align: right;">3.40</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>previous</code></td>
+<td style="text-align: left;">clip P1-P99, log1p, standardise</td>
+<td style="text-align: right;">45.03</td>
+<td style="text-align: right;">-0.24</td>
+<td style="text-align: right;">113.93</td>
+<td style="text-align: right;">-0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.34</td>
+<td style="text-align: right;">-0.43</td>
+<td style="text-align: right;">4.03</td>
+<td style="text-align: right;">-0.43</td>
+<td style="text-align: right;">4.03</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pdays</code></td>
+<td style="text-align: left;">mask -1, standardise on contacted clients, fill 0 + indicator</td>
+<td style="text-align: right;">2.62</td>
+<td style="text-align: right;">-0.41</td>
+<td style="text-align: right;">8.30</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">1.61</td>
+<td style="text-align: right;">-1.94</td>
+<td style="text-align: right;">5.60</td>
+<td style="text-align: right;">-1.94</td>
+<td style="text-align: right;">5.31</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../part2_figures/fig14_raw_vs_preprocessed.png" data-desc-position="bottom"><img alt="Figure 14. Raw versus preprocessed distributions of the transformed numerical features (training set)" src="../part2_figures/fig14_raw_vs_preprocessed.png"></a></p>
+<p><strong>Figure 14 - conclusion.</strong>
+- The raw tails (top row) are shortened to a bounded range (bottom row). The largest absolute value in the whole transformed matrix is 5.60 in train and 5.31 in test, down from 113.9 standard deviations for raw <code>previous</code>.
+- Skew drops from 8.34 to 1.03 for <code>balance</code> and from 4.94 to 1.16 for <code>campaign</code>. The bars at both ends of <code>balance</code> and at the upper end of the counts are the clipped rows.
+- <code>previous</code> remains skewed (2.34, from 45.03). This cannot be removed: 81.80% of the rows are exactly 0, and no monotone transform spreads a point mass.
+- <code>pdays</code> has standard deviation 0.43 over all rows, not 1, because it is standardised among contacted clients and is 0 for everyone else. The spike at 0 is the never-contacted group.</p>
+<h2 id="4b-dimensionality-reduction">4B. Dimensionality reduction<a class="headerlink" href="#4b-dimensionality-reduction" title="Permanent link">¶</a></h2>
+<p><strong>Input.</strong> The 51 preprocessed features of the <strong>training set only</strong> (4C). Points are coloured by the target.</p>
+<p><strong>Sample.</strong> PCA is fitted on all 36,168 training rows. t-SNE and UMAP are computed on a sample, because t-SNE is slow on the full set and a scatter of 36 thousand points is unreadable. The sample is <strong>5,000 training rows (13.8% of train)</strong>, drawn with <code>train_test_split(train_size=5000, stratify=y_train, random_state=42)</code>. It keeps the class balance: 585 <code>yes</code> (11.70%). The same sample is used in Figures 17 to 20, and all methods use <code>random_state=42</code>.</p>
+<h3 id="pca">PCA<a class="headerlink" href="#pca" title="Permanent link">¶</a></h3>
+<p><strong>Table 4.4 - Explained variance of the first 10 principal components.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">component</th>
+<th style="text-align: right;">explained variance %</th>
+<th style="text-align: right;">cumulative %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">PC1</td>
+<td style="text-align: right;">14.90</td>
+<td style="text-align: right;">14.90</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC2</td>
+<td style="text-align: right;">12.55</td>
+<td style="text-align: right;">27.45</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC3</td>
+<td style="text-align: right;">11.22</td>
+<td style="text-align: right;">38.68</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC4</td>
+<td style="text-align: right;">9.76</td>
+<td style="text-align: right;">48.43</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC5</td>
+<td style="text-align: right;">8.61</td>
+<td style="text-align: right;">57.04</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC6</td>
+<td style="text-align: right;">6.65</td>
+<td style="text-align: right;">63.69</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC7</td>
+<td style="text-align: right;">4.46</td>
+<td style="text-align: right;">68.15</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC8</td>
+<td style="text-align: right;">3.78</td>
+<td style="text-align: right;">71.93</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC9</td>
+<td style="text-align: right;">3.21</td>
+<td style="text-align: right;">75.14</td>
+</tr>
+<tr>
+<td style="text-align: left;">PC10</td>
+<td style="text-align: right;">2.71</td>
+<td style="text-align: right;">77.85</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../part2_figures/fig15_pca_explained_variance.png" data-desc-position="bottom"><img alt="Figure 15. PCA explained variance of the preprocessed training features" src="../part2_figures/fig15_pca_explained_variance.png"></a></p>
+<p><strong>Figure 15 - conclusion.</strong>
+- <strong>PC1 + PC2 explain 27.45%</strong> of the variance (PC1 14.90%, PC2 12.55%). A 2D PCA plot therefore hides almost three quarters of the variance.
+- Variance is spread over many directions: 11 components are needed for 80%, 18 for 90% and 24 for 95%. There is no low-dimensional linear structure, which agrees with the near-zero correlations among numerical features found in 3A (Figure 6).
+- The last 9 components have zero variance. This is expected: each of the 9 one-hot groups sums to 1, which gives 9 exact linear dependencies.
+- The 6 numerical columns carry 52.9% of the total variance and the 45 binary columns 47.1%, because a 0/1 column has variance of at most 0.25. PCA therefore weights numerical features more than categorical ones. This is a property of the encoding and not evidence that the numerical features are more important for <code>y</code>.</p>
+<p><strong>Table 4.5 - Largest loadings of PC1 and PC2.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">PC1 feature</th>
+<th style="text-align: right;">PC1 loading</th>
+<th style="text-align: left;">PC2 feature</th>
+<th style="text-align: right;">PC2 loading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>previous</code></td>
+<td style="text-align: right;">+0.732</td>
+<td style="text-align: left;"><code>age</code></td>
+<td style="text-align: right;">+0.739</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>campaign</code></td>
+<td style="text-align: right;">-0.348</td>
+<td style="text-align: left;"><code>balance</code></td>
+<td style="text-align: right;">+0.495</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>day</code></td>
+<td style="text-align: right;">-0.307</td>
+<td style="text-align: left;"><code>campaign</code></td>
+<td style="text-align: right;">+0.186</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>missingindicator_pdays</code></td>
+<td style="text-align: right;">-0.277</td>
+<td style="text-align: left;"><code>housing_no</code></td>
+<td style="text-align: right;">+0.168</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>poutcome_unknown</code></td>
+<td style="text-align: right;">-0.276</td>
+<td style="text-align: left;"><code>housing_yes</code></td>
+<td style="text-align: right;">-0.168</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>poutcome_failure</code></td>
+<td style="text-align: right;">+0.164</td>
+<td style="text-align: left;"><code>marital_single</code></td>
+<td style="text-align: right;">-0.166</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>balance</code></td>
+<td style="text-align: right;">+0.156</td>
+<td style="text-align: left;"><code>marital_married</code></td>
+<td style="text-align: right;">+0.143</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contact_cellular</code></td>
+<td style="text-align: right;">+0.113</td>
+<td style="text-align: left;"><code>month_may</code></td>
+<td style="text-align: right;">-0.125</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../part2_figures/fig16_pca_loadings.png" data-desc-position="bottom"><img alt="Figure 16. PCA loadings of PC1 and PC2" src="../part2_figures/fig16_pca_loadings.png"></a></p>
+<p><strong>Figure 16 - conclusion (loadings).</strong>
+- <strong>PC1 is a "contact history" axis.</strong> It has <code>previous</code> (+0.73) at one end and the not-previously-contacted indicator (-0.28) and <code>poutcome_unknown</code> (-0.28) at the other. These three move together, as Part 1 found (1B; Figure 7). <code>campaign</code> (-0.35) and <code>day</code> (-0.31) have the opposite sign to <code>previous</code>, consistent with their small negative correlations with <code>previous</code> and <code>pdays</code> in 3A. The magnitude of <code>pdays</code> has almost no weight (-0.01), which matches the finding that <code>pdays</code> and <code>previous</code> are nearly unrelated once the sentinel is removed (Spearman -0.099).
+- <strong>PC2 is an "age and wealth" axis.</strong> It is led by <code>age</code> (+0.74) and <code>balance</code> (+0.50), with <code>housing_no</code>, <code>marital_married</code> on the same side and <code>housing_yes</code>, <code>marital_single</code> on the other: older clients with higher balances and no housing loan.
+- The five largest loadings account for 90.4% of PC1 and 88.2% of PC2 (sum of squared loadings), so each axis is described by a handful of features. <code>month</code> and <code>job</code>, which had large subscription-rate spreads in 3B, barely appear, for the variance reason given above.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../part2_figures/fig17_pca_projection.png" data-desc-position="bottom"><img alt="Figure 17. 2D PCA projection of the training set, coloured by target" src="../part2_figures/fig17_pca_projection.png"></a></p>
+<p><strong>Figure 17 - conclusion.</strong>
+- The projection shows two clouds along PC1. From the loadings, the right-hand cloud is the previously contacted clients and the large left-hand cloud is the never-contacted majority.
+- <strong>The classes overlap in both clouds.</strong> <code>yes</code> points are relatively more frequent on the right, but no line separates them. The class means differ by +0.59 pooled standard deviations on PC1 and by +0.22 on PC2 (all training rows).
+- A linear view of the two highest-variance directions is therefore not enough to separate subscribers. This is expected, since PCA does not use <code>y</code> and these two components hold only 27.45% of the variance.</p>
+<h3 id="t-sne">t-SNE<a class="headerlink" href="#t-sne" title="Permanent link">¶</a></h3>
+<p>Perplexities compared: 5, 30, 50. Settings: <code>init="pca"</code>, <code>learning_rate="auto"</code>, default number of iterations, <code>random_state=42</code>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../part2_figures/fig18_tsne_perplexity.png" data-desc-position="bottom"><img alt="Figure 18. t-SNE of a stratified sample of 5,000 training rows at three perplexities, coloured by target" src="../part2_figures/fig18_tsne_perplexity.png"></a></p>
+<p><strong>Figure 18 - conclusion.</strong>
+- <strong>Perplexity 5</strong> breaks the data into many tiny groups of near-identical profiles. Only very local neighbourhoods are kept and no larger structure is visible.
+- <strong>Perplexity 30 and 50</strong> show one island that is separated from the main mass and has a visibly higher density of <code>yes</code> points. The main mass contains smaller pockets where <code>yes</code> is more frequent, but most of it is mixed.
+- The island appears at both larger perplexities, so it is not an artifact of a single setting. The layout of the main mass changes between panels and should not be interpreted.</p>
+<h3 id="umap">UMAP<a class="headerlink" href="#umap" title="Permanent link">¶</a></h3>
+<p><code>n_neighbors</code> compared: 5, 15, 50. Settings: <code>min_dist=0.1</code>, Euclidean metric, <code>random_state=42</code>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../part2_figures/fig19_umap_n_neighbors.png" data-desc-position="bottom"><img alt="Figure 19. UMAP of the same sample of 5,000 training rows at three n_neighbors values, coloured by target" src="../part2_figures/fig19_umap_n_neighbors.png"></a></p>
+<p><strong>Figure 19 - conclusion.</strong>
+- All three settings isolate one compact island with a high share of <code>yes</code>, the same structure that t-SNE finds.
+- With <code>n_neighbors</code> = 5 and 15, the remaining points form two further groups. With <code>n_neighbors</code> = 50, which gives more weight to global structure, these two groups join into one connected mass while the first island stays apart.
+- Inside the two large groups, <code>yes</code> and <code>no</code> are mixed, with <code>yes</code> slightly concentrated along some edges.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../part2_figures/fig20_embeddings_by_contact_history.png" data-desc-position="bottom"><img alt="Figure 20. The same t-SNE and UMAP embeddings, coloured by contact history instead of target" src="../part2_figures/fig20_embeddings_by_contact_history.png"></a></p>
+<p><strong>Figure 20 - conclusion.</strong> Colouring the same embeddings by two features identified in Part 1 explains the islands:
+- The isolated island is the <strong>previously contacted</strong> clients (n = 858 in the sample, subscription rate 23.3%).
+- The other two groups are never-contacted clients, split by whether <code>contact</code> is <code>unknown</code> (n = 1,422, rate 4.4%) or known (n = 2,720, rate 11.9%).
+- The visible structure is therefore <strong>defined by contact history and by the recording period</strong> (1B showed that <code>contact = unknown</code> marks the early part of the file), not by the target. The groups differ in subscription rate, but within each group the classes are mixed.</p>
+<h3 id="what-t-sne-and-umap-reveal-relative-to-pca">What t-SNE and UMAP reveal relative to PCA<a class="headerlink" href="#what-t-sne-and-umap-reveal-relative-to-pca" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>PCA</strong> gives one interpretable linear axis (contact history) and shows two overlapping clouds. It hides the <code>contact = unknown</code> group, because that group differs in binary columns with little variance.</li>
+<li><strong>t-SNE and UMAP</strong> use local neighbourhoods in all 51 dimensions. They separate the previously contacted clients cleanly, and UMAP also separates the <code>contact = unknown</code> group. These groups are defined by categorical features that PCA down-weights.</li>
+<li><strong>None of the three methods separates <code>yes</code> from <code>no</code>.</strong> All three agree that subscribers are more frequent among previously contacted clients and are otherwise spread through the majority. The class boundary is not a simple low-dimensional one, so a model will need non-linear combinations of features, and high accuracy on the minority class should not be expected from these inputs alone.</li>
+</ul>
+<p><strong>Interpretation limits.</strong> In t-SNE and UMAP plots, <strong>the size of a cluster, the distance between clusters and the density of points have no direct quantitative interpretation.</strong> The axes have arbitrary units. Both methods preserve neighbourhoods, not distances: a large island is not a large or spread-out group, and two islands that are far apart are not "more different" than two that are close. The layouts also change with perplexity, <code>n_neighbors</code> and the random seed. Only structure that persists across settings (here, the previously contacted island) is treated as a finding, and it was confirmed with the original features (Figure 20), not from the plot alone. These embeddings are diagnostic plots only; they are not used as model inputs.</p>
+<h2 id="4c-pipeline">4C. Pipeline<a class="headerlink" href="#4c-pipeline" title="Permanent link">¶</a></h2>
+<p><code>build_preprocessor()</code> in <code>code/bank_preprocessing.py</code> returns an unfitted <code>Pipeline</code> whose single step is this <code>ColumnTransformer</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Columns</th>
+<th>Steps (in order)</th>
+<th>Justified by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>standard</code></td>
+<td><code>age</code>, <code>day</code></td>
+<td>median imputer (safeguard) -&gt; <code>StandardScaler</code></td>
+<td>mild skew, no clipping needed (2A)</td>
+</tr>
+<tr>
+<td><code>signed</code></td>
+<td><code>balance</code></td>
+<td>median imputer (safeguard) -&gt; clip to train P1-P99 -&gt; Yeo-Johnson with standardisation</td>
+<td>heavy tails on both sides, negative values (2A, Figure 12)</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td><code>campaign</code>, <code>previous</code></td>
+<td>median imputer (safeguard) -&gt; clip to train P1-P99 -&gt; <code>log1p</code> -&gt; <code>StandardScaler</code></td>
+<td>heavy-tailed counts (2A, Figure 13)</td>
+</tr>
+<tr>
+<td><code>sentinel</code></td>
+<td><code>pdays</code></td>
+<td>mask <code>-1</code> -&gt; <code>StandardScaler</code> (contacted clients) -&gt; constant imputer 0 with indicator</td>
+<td>sentinel analysis (1B, Figure 7)</td>
+</tr>
+<tr>
+<td><code>categorical</code></td>
+<td>9 categorical features</td>
+<td>constant <code>"unknown"</code> imputer (safeguard) -&gt; <code>OneHotEncoder(handle_unknown="ignore")</code></td>
+<td><code>"unknown"</code> as category (1B), low cardinality (2B)</td>
+</tr>
+</tbody>
+</table>
+<p><code>duration</code> is not an input: it was excluded as leakage in 1B, and <code>load_data()</code> never selects it.</p>
+<p><strong>Usage.</strong> The pipeline is fitted on <code>X_train</code> only and the test set is only transformed:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"code"</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">bank_preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">build_preprocessor</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>                                  <span class="c1"># 15 predictors, y: yes = 1, no = 0</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>      <span class="c1"># the Part 1 split (1D)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">pre</span> <span class="o">=</span> <span class="n">build_preprocessor</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>             <span class="c1"># training set only</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">Z_train</span> <span class="o">=</span> <span class="n">pre</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">Z_test</span> <span class="o">=</span> <span class="n">pre</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>                      <span class="c1"># transform only</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">feature_names</span> <span class="o">=</span> <span class="n">pre</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Verification</strong> (output of <code>python code/bank_preprocessing.py</code>, repeated as assertions in <code>scripts/part2_eda.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NaN</code> in raw <code>X_train</code> / <code>X_test</code></td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td><code>NaN</code> after transform, train / test</td>
+<td><strong>0 / 0</strong></td>
+</tr>
+<tr>
+<td>Infinite values after transform</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Transformed training shape</td>
+<td><strong>36,168 x 51</strong></td>
+</tr>
+<tr>
+<td>Transformed test shape</td>
+<td><strong>9,043 x 51</strong></td>
+</tr>
+<tr>
+<td>Output columns</td>
+<td>51 = 6 numerical + 1 indicator + 44 one-hot</td>
+</tr>
+<tr>
+<td>Test levels unseen in train</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table 4.6 - Feature names after preprocessing</strong> (in output order; also in <code>part2_outputs/feature_names.csv</code>).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">group</th>
+<th style="text-align: right;">columns</th>
+<th style="text-align: left;">feature names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">standardised numerical</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;"><code>age</code>, <code>day</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">clipped + transformed numerical</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;"><code>balance</code>, <code>campaign</code>, <code>previous</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pdays</code> and its indicator</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;"><code>pdays</code>, <code>missingindicator_pdays</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>job</code></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;"><code>job_admin.</code>, <code>job_blue-collar</code>, <code>job_entrepreneur</code>, <code>job_housemaid</code>, <code>job_management</code>, <code>job_retired</code>, <code>job_self-employed</code>, <code>job_services</code>, <code>job_student</code>, <code>job_technician</code>, <code>job_unemployed</code>, <code>job_unknown</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>marital</code></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;"><code>marital_divorced</code>, <code>marital_married</code>, <code>marital_single</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>education</code></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;"><code>education_primary</code>, <code>education_secondary</code>, <code>education_tertiary</code>, <code>education_unknown</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>default</code></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;"><code>default_no</code>, <code>default_yes</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>housing</code></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;"><code>housing_no</code>, <code>housing_yes</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>loan</code></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;"><code>loan_no</code>, <code>loan_yes</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>contact</code></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;"><code>contact_cellular</code>, <code>contact_telephone</code>, <code>contact_unknown</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>month</code></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;"><code>month_apr</code>, <code>month_aug</code>, <code>month_dec</code>, <code>month_feb</code>, <code>month_jan</code>, <code>month_jul</code>, <code>month_jun</code>, <code>month_mar</code>, <code>month_may</code>, <code>month_nov</code>, <code>month_oct</code>, <code>month_sep</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">one-hot <code>poutcome</code></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;"><code>poutcome_failure</code>, <code>poutcome_other</code>, <code>poutcome_success</code>, <code>poutcome_unknown</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Run from a clean clone.</strong> The raw file <code>data/raw/bank-full.csv</code> is committed, so no download is needed. If it is missing, <code>python scripts/part1_download_data.py</code> fetches it from the UCI archive.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python -m venv .venv
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>.venv\Scripts\activate            (Windows; on Linux/macOS: source .venv/bin/activate)
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>pip install -r requirements.txt
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>python code/bank_preprocessing.py
+</span></code></pre></div>
+<p>The last command fits the pipeline on the training set and prints the shapes, the <code>NaN</code> counts, the clip bounds, the clipped rows and the 51 feature names. Add <code>--out data/processed</code> to also write the transformed matrices as CSV.</p>
+<hr>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../stage-3/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Bivariate &amp; multivariate">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                3. Bivariate &amp; multivariate
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../stage-5/" class="md-footer__link md-footer__link--next" aria-label="Next: 5. Synthesis">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                5. Synthesis
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.code.select", "content.tooltips", "navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.footer", "navigation.top", "navigation.path", "navigation.tracking", "navigation.expand", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -1,0 +1,1677 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Classification and regression EDAs for Insper's Artificial Neural Networks and Deep Learning, 2026.2">
+      
+      
+        <meta name="author" content="Ana Helena Caiafa, Thais Rocha, Esther Caroline Rodrigues, Carolina Eskenazi">
+      
+      
+        <link rel="canonical" href="https://thaisrs165.github.io/exploratory_data_analysis/projects/eda-regression/stage-4/">
+      
+      
+        <link rel="prev" href="../stage-3/">
+      
+      
+        <link rel="next" href="../stage-5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Regression: 4. Preprocessing - Exploratory Data Analysis 26.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-preprocessing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Exploratory Data Analysis 26.2" class="md-header__button md-logo" aria-label="Exploratory Data Analysis 26.2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Exploratory Data Analysis 26.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Regression: 4. Preprocessing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_3" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Thaisrs165/exploratory_data_analysis" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Thaisrs165/exploratory_data_analysis
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../eda/stage-0/" class="md-tabs__link">
+          
+  
+  
+  Classification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../stage-0/" class="md-tabs__link">
+          
+  
+  
+  Regression
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Exploratory Data Analysis 26.2" class="md-nav__button md-logo" aria-label="Exploratory Data Analysis 26.2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Exploratory Data Analysis 26.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Thaisrs165/exploratory_data_analysis" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Thaisrs165/exploratory_data_analysis
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/stage-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/stage-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Initial inspection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/stage-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Univariate analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/stage-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bivariate &amp; multivariate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/stage-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/stage-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full report (one page)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Regression
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Initial inspection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Univariate analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bivariate &amp; multivariate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#4a-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4A. Strategies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4A. Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorical-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Categorical encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4b-dimensionality-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4B. Dimensionality reduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4B. Dimensionality reduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-sne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        t-SNE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UMAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-t-sne-and-umap-reveal-relative-to-pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What t-SNE and UMAP reveal relative to PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4c-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4C. Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full report (one page)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#4a-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4A. Strategies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4A. Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorical-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Categorical encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4b-dimensionality-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4B. Dimensionality reduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4B. Dimensionality reduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t-sne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        t-SNE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UMAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-t-sne-and-umap-reveal-relative-to-pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What t-SNE and UMAP reveal relative to PCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4c-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4C. Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../stage-0/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Regression
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-preprocessing">4. Preprocessing<a class="headerlink" href="#4-preprocessing" title="Permanent link">¶</a></h1>
+<div class="admonition tip">
+<p>Regression EDA, section 5 of 7. Use <strong>Next</strong> at the bottom to keep reading, or open the <a href="../">full report on one page</a>.</p>
+</div>
+<p>The destination is a <strong>neural network</strong>, which needs dense, finite inputs on comparable scales. Each choice below cites the finding that motivates it. Every statistic is fitted on the training set only (4C).</p>
+<h2 id="4a-strategies">4A. Strategies<a class="headerlink" href="#4a-strategies" title="Permanent link">¶</a></h2>
+<h3 id="missing-values">Missing values<a class="headerlink" href="#missing-values" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 <code>NaN</code> in all columns (1B)</td>
+<td><code>SimpleImputer</code> in every branch (median for numerical features, most frequent for categorical). It changes nothing on this data but guards against <code>NaN</code> in future data.</td>
+</tr>
+<tr>
+<td><code>humidity == 0</code> in 17 hours, a physically impossible sensor fault (1B, Figure 2)</td>
+<td>Mask 0 to <code>NaN</code>, then impute with the <strong>training median of the valid readings (57%)</strong>. Affected: <strong>13 training rows and 4 test rows.</strong></td>
+</tr>
+<tr>
+<td><code>functioning_day == "No"</code> means target = 0 by rule (1B)</td>
+<td>Not a missing-value case: these 295 rows are removed before the split. In deployment, closed hours are predicted as 0 by rule.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outliers">Outliers<a class="headerlink" href="#outliers" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rainfall</code> (skewness 15.32, max 35 mm) and <code>snowfall</code> (skewness 9.47, max 8.8 cm) have extreme tails (Figure 3), and demand is already near its floor once it rains or snows (3A: median 86 and 149 bikes/h)</td>
+<td><strong>Cap at the training P99</strong>: rainfall at <strong>4.0 mm</strong>, snowfall at <strong>2.2 cm</strong> (<code>QuantileClipper</code>), then <code>log1p</code>. Training rows affected: 60 (rainfall), 56 (snowfall), <strong>115 rows with at least one clipped value (1.70%)</strong>. Test rows: 16, 41, <strong>57 (3.35%)</strong>. <strong>0 rows removed.</strong></td>
+</tr>
+<tr>
+<td><code>wind_speed</code>, <code>solar_radiation</code>: moderate tails, physically valid (Figure 3)</td>
+<td>Not clipped; <code>log1p</code> compresses them.</td>
+</tr>
+<tr>
+<td><code>visibility</code> at the 2000 ceiling (26.25% of training rows)</td>
+<td>Kept as is. The ceiling is censoring, not an outlier, and standardization keeps the ceiling as a single value.</td>
+</tr>
+</tbody>
+</table>
+<p>The test clip rate is higher (3.35% vs 1.70%) because snowy days happened to fall more often into the test days (41 clipped snowfall hours from 1,704 test rows). The bounds stay those learned on train.</p>
+<h3 id="categorical-encoding">Categorical encoding<a class="headerlink" href="#categorical-encoding" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seasons</code> (4), <code>holiday</code> (2) and <code>day_of_week</code> (7) have low cardinality and no natural order usable by a network (2B)</td>
+<td><strong>One-hot</strong> encoding, giving 13 columns.</td>
+</tr>
+<tr>
+<td>Categories that appear only in the test set</td>
+<td><code>OneHotEncoder(handle_unknown="ignore")</code>: an unseen level becomes an all-zero row instead of an error. None occurs in this test set (checked: 0 test-only levels for all three features).</td>
+</tr>
+<tr>
+<td><code>hour</code> is cyclical: 23 h and 0 h are neighbours, and demand has two daily peaks (Figure 6, 8)</td>
+<td>Encode as <strong><code>hour_sin</code>, <code>hour_cos</code></strong> = sin/cos(2π·hour/24).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="scaling">Scaling<a class="headerlink" href="#scaling" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Finding (2A)</th>
+<th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>temperature</code>, <code>visibility</code> near-symmetric or bounded</td>
+<td><code>StandardScaler</code></td>
+</tr>
+<tr>
+<td><code>humidity</code> near-symmetric, with the sensor zeros</td>
+<td>mask 0 → median impute → <code>StandardScaler</code></td>
+</tr>
+<tr>
+<td><code>wind_speed</code> (skewness 0.91), <code>solar_radiation</code> (1.48) right-skewed</td>
+<td><code>log1p</code> → <code>StandardScaler</code>; skewness drops to <strong>0.02</strong> and <strong>1.05</strong></td>
+</tr>
+<tr>
+<td><code>rainfall</code>, <code>snowfall</code> zero-inflated, extreme tails</td>
+<td>P99 clip → <code>log1p</code> → <code>StandardScaler</code>; skewness drops from 15.32 to <strong>5.59</strong> and from 9.47 to <strong>5.20</strong></td>
+</tr>
+<tr>
+<td><code>dew_point</code> redundant with temperature (R² 0.9916, 3A)</td>
+<td>dropped</td>
+</tr>
+<tr>
+<td>target skewness 1.125 (1C)</td>
+<td>not in the X pipeline: train on <code>sqrt(y)</code> (skewness 0.352)</td>
+</tr>
+</tbody>
+</table>
+<p>The remaining skewness of rainfall and snowfall is a property of the 95% zero mass, which no monotonic transform removes. After the transform, all non-zero values lie in a narrow range, which is what matters for gradient-based training.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../figures/fig11_raw_vs_preprocessed.png" data-desc-position="bottom"><img alt="Figure 11" src="../figures/fig11_raw_vs_preprocessed.png"></a></p>
+<p><strong>Figure 11.</strong> The pipeline turns <code>wind_speed</code> into an almost symmetric feature (0.91 → 0.02). For <code>solar_radiation</code>, <code>rainfall</code> and <code>snowfall</code> it compresses the tail into a few standard deviations while keeping the zero spike (dry or night hours) as a separate value. <strong>Conclusion: no input to the network can reach the ~30 SD values seen in Figure 3.</strong></p>
+<h2 id="4b-dimensionality-reduction">4B. Dimensionality reduction<a class="headerlink" href="#4b-dimensionality-reduction" title="Permanent link">¶</a></h2>
+<p>The input is the 22 preprocessed training features (6,761 rows; the full training set, no subsample needed). Points are colored by <code>log1p(rented_bike_count)</code>, with the color range clipped to P2-P98 for contrast.</p>
+<h3 id="pca">PCA<a class="headerlink" href="#pca" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../figures/fig12_pca_variance_loadings.png" data-desc-position="bottom"><img alt="Figure 12" src="../figures/fig12_pca_variance_loadings.png"></a></p>
+<p><strong>Figure 12.</strong> <strong>PC1 explains 24.87%, PC2 16.73%, PC1 + PC2 = 41.60%.</strong> 7 components reach 80%, 11 reach 90%, and 15 reach 95%. The rank is 19, not 22: each one-hot group sums to 1, so 3 columns are linearly dependent.</p>
+<ul>
+<li><strong>PC1 (dry and sunny vs humid and overcast):</strong> humidity +0.54, solar_radiation -0.49, wind_speed -0.39, visibility -0.39, rainfall +0.25. Its correlation with log1p(target) is <strong>-0.449</strong>: humid, dark, still hours have low demand.</li>
+<li><strong>PC2 (warm season vs cold):</strong> temperature +0.69, snowfall -0.36, solar_radiation +0.31, rainfall +0.27, humidity +0.26, seasons_Winter -0.24, seasons_Summer +0.20. Its correlation with log1p(target) is <strong>+0.382</strong>.</li>
+<li>The one-hot columns have near-zero loadings on PC1 and PC2. A 0/1 column has variance at most 0.25, against 1.0 for each standardized numerical feature, so PCA is dominated by the weather variables.</li>
+</ul>
+<p><strong>Conclusion: the linear structure is spread over many directions (2 PCs = 41.60%). In Figure 13 (left), demand is highest in the upper-left region (dry, sunny, warm). It is lowest at the upper right (high PC1: humid, rainy hours) and at the bottom (low PC2: winter), with gradual transitions and no sharp boundary.</strong></p>
+<h3 id="t-sne">t-SNE<a class="headerlink" href="#t-sne" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../figures/fig13_pca_tsne.png" data-desc-position="bottom"><img alt="Figure 13" src="../figures/fig13_pca_tsne.png"></a></p>
+<p><strong>Figure 13.</strong> t-SNE with <strong>perplexity 30</strong> (final KL divergence 1.173) and <strong>perplexity 50</strong> (KL 1.218):
+- Both show four large horizontal bands (one per season, Figure 15) plus a smaller group at the right edge, which is mostly wet hours.
+- Inside each band, points form short curved strands: consecutive hours of the same day with similar weather.
+- Perplexity 50 gives a smoother, more global arrangement than 30, but the same groups.
+- The low-demand (light) points concentrate in the bottom band (winter) and in the right-edge group (wet hours).</p>
+<p><strong>Conclusion: unlike PCA, t-SNE separates discrete regimes. Distances between bands and band sizes have no direct meaning in t-SNE.</strong></p>
+<h3 id="umap">UMAP<a class="headerlink" href="#umap" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../figures/fig14_umap.png" data-desc-position="bottom"><img alt="Figure 14" src="../figures/fig14_umap.png"></a></p>
+<p><strong>Figure 14.</strong> UMAP with <strong>n_neighbors = 15</strong> and <strong>n_neighbors = 50</strong> (min_dist 0.1):
+- <strong>n = 15</strong> gives many small islands of similar hours.
+- <strong>n = 50</strong> merges them into a few large groups, which is a more global view.
+- Two small groups have the lowest demand, with low values clustered inside them: one is made of rainy hours, the other of snowy hours. This matches 3A (median 86 and 149 bikes/h versus about 587 when dry).</p>
+<p><strong>Conclusion: UMAP isolates the precipitation regime as its own group. Distances between groups and their sizes are not interpretable.</strong></p>
+<h3 id="what-t-sne-and-umap-reveal-relative-to-pca">What t-SNE and UMAP reveal relative to PCA<a class="headerlink" href="#what-t-sne-and-umap-reveal-relative-to-pca" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../figures/fig15_embeddings_by_season_hour.png" data-desc-position="bottom"><img alt="Figure 15" src="../figures/fig15_embeddings_by_season_hour.png"></a></p>
+<p><strong>Figure 15.</strong>
+- <strong>Coloring by season (top row)</strong> explains the large groups of t-SNE and UMAP: each is one season. PCA only shows a gradient from winter (bottom) to summer (top). The local methods separate the seasons because two rows in different seasons differ by √2 in the one-hot columns, which dominates small neighborhoods. Note that this separation partly reflects our encoding, not only the data.
+- <strong>Coloring by hour (bottom row)</strong> shows the strands inside each group are ordered by hour of day (the sin/cos encoding makes a continuous loop).</p>
+<p><strong>Conclusion: the data are organized by season → precipitation → hour-of-day trajectory. The target varies smoothly along those trajectories rather than forming separate clusters, as expected for a regression target. A network must learn those non-linear, interacting effects, and no 2-D projection makes the target linearly separable.</strong></p>
+<p>Coordinates of all embeddings: <code>outputs/embeddings_train.csv</code>.</p>
+<h2 id="4c-pipeline">4C. Pipeline<a class="headerlink" href="#4c-pipeline" title="Permanent link">¶</a></h2>
+<p>Importable file: <a href="https://github.com/Thaisrs165/exploratory_data_analysis/blob/main/code/bike_preprocessing.py"><code>code/bike_preprocessing.py</code></a>. It defines <code>load_data()</code> (drops the 295 non-functioning rows), <code>split()</code> (1D) and <code>build_preprocessor()</code>: a <code>Pipeline</code> that wraps one <code>ColumnTransformer</code>, with five branches:</p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Columns</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cyclical</code></td>
+<td>hour</td>
+<td>most-frequent impute → sin/cos</td>
+</tr>
+<tr>
+<td><code>standard</code></td>
+<td>temperature, visibility</td>
+<td>median impute → <code>StandardScaler</code></td>
+</tr>
+<tr>
+<td><code>sensor_zero</code></td>
+<td>humidity</td>
+<td>0 → <code>NaN</code> → median impute → <code>StandardScaler</code></td>
+</tr>
+<tr>
+<td><code>skewed</code></td>
+<td>wind_speed, solar_radiation</td>
+<td>median impute → <code>log1p</code> → <code>StandardScaler</code></td>
+</tr>
+<tr>
+<td><code>heavy</code></td>
+<td>rainfall, snowfall</td>
+<td>median impute → P99 <code>QuantileClipper</code> → <code>log1p</code> → <code>StandardScaler</code></td>
+</tr>
+<tr>
+<td><code>categorical</code></td>
+<td>seasons, holiday, day_of_week</td>
+<td>most-frequent impute → <code>OneHotEncoder(handle_unknown="ignore")</code></td>
+</tr>
+<tr>
+<td><em>(dropped)</em></td>
+<td>date, dew_point</td>
+<td><code>remainder="drop"</code></td>
+</tr>
+</tbody>
+</table>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"code"</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">bike_preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">build_preprocessor</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">pre</span> <span class="o">=</span> <span class="n">build_preprocessor</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>           <span class="c1"># fitted on the training set only</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">Z_train</span><span class="p">,</span> <span class="n">Z_test</span> <span class="o">=</span> <span class="n">pre</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="n">pre</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Checks (output of <code>python code/bike_preprocessing.py</code>):</strong></p>
+<ul>
+<li>Input shapes: train 6,761 x 13, test 1,704 x 13. The 13 columns are <code>date</code> plus the 12 listed in the table above.</li>
+<li><strong>Output shapes: train 6,761 x 22, test 1,704 x 22.</strong></li>
+<li><strong><code>NaN</code> after the pipeline: 0 in train, 0 in test.</strong></li>
+<li>Clip bounds (train P99): rainfall 4.0 mm, snowfall 2.2 cm.</li>
+<li><strong>22 feature names:</strong> <code>hour_sin</code>, <code>hour_cos</code>, <code>temperature</code>, <code>visibility</code>, <code>humidity</code>, <code>wind_speed</code>, <code>solar_radiation</code>, <code>rainfall</code>, <code>snowfall</code>, <code>seasons_Autumn</code>, <code>seasons_Spring</code>, <code>seasons_Summer</code>, <code>seasons_Winter</code>, <code>holiday_Holiday</code>, <code>holiday_No Holiday</code>, <code>day_of_week_Fri</code>, <code>day_of_week_Mon</code>, <code>day_of_week_Sat</code>, <code>day_of_week_Sun</code>, <code>day_of_week_Thu</code>, <code>day_of_week_Tue</code>, <code>day_of_week_Wed</code> (<code>outputs/feature_names.csv</code>).</li>
+</ul>
+<hr>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../stage-3/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Bivariate &amp; multivariate">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                3. Bivariate &amp; multivariate
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../stage-5/" class="md-footer__link md-footer__link--next" aria-label="Next: 5. Synthesis">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                5. Synthesis
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.code.select", "content.tooltips", "navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.footer", "navigation.top", "navigation.path", "navigation.tracking", "navigation.expand", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

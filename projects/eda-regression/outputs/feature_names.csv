@@ -1,0 +1,23 @@
+index,feature
+0,hour_sin
+1,hour_cos
+2,temperature
+3,visibility
+4,humidity
+5,wind_speed
+6,solar_radiation
+7,rainfall
+8,snowfall
+9,seasons_Autumn
+10,seasons_Spring
+11,seasons_Summer
+12,seasons_Winter
+13,holiday_Holiday
+14,holiday_No Holiday
+15,day_of_week_Fri
+16,day_of_week_Mon
+17,day_of_week_Sat
+18,day_of_week_Sun
+19,day_of_week_Thu
+20,day_of_week_Tue
+21,day_of_week_Wed

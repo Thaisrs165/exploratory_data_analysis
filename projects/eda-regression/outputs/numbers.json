@@ -1,0 +1,693 @@
+{
+  "rows_raw": 8760,
+  "cols_raw": 14,
+  "date_min": "2017-12-01",
+  "date_max": "2018-11-30",
+  "n_days": 365,
+  "rows_per_day": [
+    24
+  ],
+  "nan_total": 0,
+  "duplicate_rows": 0,
+  "duplicate_date_hour": 0,
+  "checks": {
+    "hour outside 0-23": 0,
+    "humidity outside 0-100": 0,
+    "humidity == 0": 17,
+    "negative wind/visibility/solar/rain/snow": 0,
+    "dew_point > temperature": 0,
+    "solar_radiation > 0 between 22h and 4h": 0,
+    "snowfall > 0 with temperature > 5 \u00b0C": 14,
+    "season inconsistent with month": 0,
+    "visibility at the 2000 (20 km) ceiling": 2245,
+    "rented_bike_count == 0": 295
+  },
+  "humidity_zero_dates": [
+    "2018-05-19",
+    "2018-05-21",
+    "2018-05-22",
+    "2018-05-27",
+    "2018-05-28"
+  ],
+  "nonfunc_rows": 295,
+  "nonfunc_pct": 3.37,
+  "nonfunc_max_target": 0,
+  "zero_target_rows": 295,
+  "zero_target_in_functioning": 0,
+  "nonfunc_days_full": 12,
+  "nonfunc_days_any": 13,
+  "rows_retained": 8465,
+  "target_all": {
+    "n": 8465,
+    "mean": 729.16,
+    "median": 542.0,
+    "std": 642.35,
+    "min": 2.0,
+    "max": 3556.0,
+    "q1": 214.0,
+    "q3": 1084.0,
+    "p99": 2556.36,
+    "skew": 1.14,
+    "kurtosis": 0.82,
+    "skew_log1p": -0.77,
+    "skew_sqrt": 0.347,
+    "zeros": 0
+  },
+  "n_train": 6761,
+  "n_test": 1704,
+  "test_pct": 20.13,
+  "days_train": 282,
+  "days_test": 71,
+  "days_overlap": 0,
+  "target_train": {
+    "n": 6761,
+    "mean": 731.07,
+    "median": 547.0,
+    "std": 640.69,
+    "min": 2.0,
+    "max": 3418.0,
+    "q1": 214.0,
+    "q3": 1087.0,
+    "p99": 2522.6,
+    "skew": 1.125,
+    "kurtosis": 0.752,
+    "skew_log1p": -0.749,
+    "skew_sqrt": 0.352,
+    "zeros": 0
+  },
+  "target_test": {
+    "n": 1704,
+    "mean": 721.55,
+    "median": 531.5,
+    "std": 649.03,
+    "min": 4.0,
+    "max": 3556.0,
+    "q1": 214.0,
+    "q3": 1074.0,
+    "p99": 2611.92,
+    "skew": 1.197,
+    "kurtosis": 1.088,
+    "skew_log1p": -0.819,
+    "skew_sqrt": 0.332,
+    "zeros": 0
+  },
+  "numerical_summary": {
+    "hour": {
+      "mean": 11.509,
+      "std": 6.921,
+      "min": 0.0,
+      "1%": 0.0,
+      "50%": 12.0,
+      "99%": 23.0,
+      "max": 23.0,
+      "skew": -0.002,
+      "zero_pct": 4.156,
+      "iqr_outliers_pct": 0.0
+    },
+    "temperature": {
+      "mean": 12.557,
+      "std": 12.235,
+      "min": -17.8,
+      "1%": -13.7,
+      "50%": 12.9,
+      "99%": 35.14,
+      "max": 39.4,
+      "skew": -0.163,
+      "zero_pct": 0.266,
+      "iqr_outliers_pct": 0.0
+    },
+    "humidity": {
+      "mean": 57.907,
+      "std": 20.323,
+      "min": 0.0,
+      "1%": 18.0,
+      "50%": 57.0,
+      "99%": 97.0,
+      "max": 98.0,
+      "skew": 0.087,
+      "zero_pct": 0.192,
+      "iqr_outliers_pct": 0.0
+    },
+    "wind_speed": {
+      "mean": 1.731,
+      "std": 1.044,
+      "min": 0.0,
+      "1%": 0.1,
+      "50%": 1.5,
+      "99%": 4.7,
+      "max": 7.4,
+      "skew": 0.913,
+      "zero_pct": 0.961,
+      "iqr_outliers_pct": 1.849
+    },
+    "visibility": {
+      "mean": 1442.192,
+      "std": 612.116,
+      "min": 27.0,
+      "1%": 165.2,
+      "50%": 1722.0,
+      "99%": 2000.0,
+      "max": 2000.0,
+      "skew": -0.719,
+      "zero_pct": 0.0,
+      "iqr_outliers_pct": 0.0
+    },
+    "dew_point": {
+      "mean": 3.71,
+      "std": 13.391,
+      "min": -30.6,
+      "1%": -25.44,
+      "50%": 4.5,
+      "99%": 24.8,
+      "max": 27.2,
+      "skew": -0.324,
+      "zero_pct": 0.666,
+      "iqr_outliers_pct": 0.0
+    },
+    "solar_radiation": {
+      "mean": 0.575,
+      "std": 0.875,
+      "min": 0.0,
+      "1%": 0.0,
+      "50%": 0.01,
+      "99%": 3.164,
+      "max": 3.52,
+      "skew": 1.485,
+      "zero_pct": 49.238,
+      "iqr_outliers_pct": 7.218
+    },
+    "rainfall": {
+      "mean": 0.142,
+      "std": 1.147,
+      "min": 0.0,
+      "1%": 0.0,
+      "50%": 0.0,
+      "99%": 4.0,
+      "max": 35.0,
+      "skew": 15.323,
+      "zero_pct": 94.542,
+      "iqr_outliers_pct": 5.458
+    },
+    "snowfall": {
+      "mean": 0.069,
+      "std": 0.405,
+      "min": 0.0,
+      "1%": 0.0,
+      "50%": 0.0,
+      "99%": 2.2,
+      "max": 8.8,
+      "skew": 9.475,
+      "zero_pct": 94.823,
+      "iqr_outliers_pct": 5.177
+    }
+  },
+  "visibility_ceiling_pct_train": 26.25,
+  "rain_zero_pct_train": 94.54,
+  "snow_zero_pct_train": 94.82,
+  "solar_zero_pct_train": 49.24,
+  "categorical_freq": {
+    "day_of_week": {
+      "Sun": [
+        1032,
+        15.26
+      ],
+      "Wed": [
+        1008,
+        14.91
+      ],
+      "Thu": [
+        1008,
+        14.91
+      ],
+      "Mon": [
+        960,
+        14.2
+      ],
+      "Tue": [
+        960,
+        14.2
+      ],
+      "Fri": [
+        912,
+        13.49
+      ],
+      "Sat": [
+        881,
+        13.03
+      ]
+    },
+    "functioning_day": {
+      "Yes": [
+        8465,
+        96.63
+      ],
+      "No": [
+        295,
+        3.37
+      ]
+    },
+    "holiday": {
+      "No Holiday": [
+        6425,
+        95.03
+      ],
+      "Holiday": [
+        336,
+        4.97
+      ]
+    },
+    "seasons": {
+      "Summer": [
+        1752,
+        25.91
+      ],
+      "Winter": [
+        1728,
+        25.56
+      ],
+      "Spring": [
+        1728,
+        25.56
+      ],
+      "Autumn": [
+        1553,
+        22.97
+      ]
+    }
+  },
+  "holiday_days_train": 14,
+  "top_pairs": [
+    {
+      "a": "temperature",
+      "b": "dew_point",
+      "pearson": 0.919,
+      "spearman": 0.918
+    },
+    {
+      "a": "humidity",
+      "b": "dew_point",
+      "pearson": 0.544,
+      "spearman": 0.533
+    },
+    {
+      "a": "humidity",
+      "b": "visibility",
+      "pearson": -0.553,
+      "spearman": -0.491
+    },
+    {
+      "a": "humidity",
+      "b": "solar_radiation",
+      "pearson": -0.452,
+      "spearman": -0.432
+    },
+    {
+      "a": "wind_speed",
+      "b": "solar_radiation",
+      "pearson": 0.338,
+      "spearman": 0.374
+    }
+  ],
+  "corr_target": {
+    "temperature": [
+      0.565,
+      0.617
+    ],
+    "dew_point": [
+      0.409,
+      0.426
+    ],
+    "hour": [
+      0.432,
+      0.423
+    ],
+    "solar_radiation": [
+      0.274,
+      0.413
+    ],
+    "rainfall": [
+      -0.118,
+      -0.275
+    ],
+    "snowfall": [
+      -0.144,
+      -0.241
+    ],
+    "humidity": [
+      -0.186,
+      -0.205
+    ],
+    "visibility": [
+      0.209,
+      0.19
+    ],
+    "wind_speed": [
+      0.114,
+      0.141
+    ]
+  },
+  "rainfall_wet_pct_train": 5.46,
+  "median_target_rainfall_wet": 86.0,
+  "median_target_rainfall_dry": 587.0,
+  "snowfall_wet_pct_train": 5.18,
+  "median_target_snowfall_wet": 149.0,
+  "median_target_snowfall_dry": 588.0,
+  "dew_point_r2_from_temp_humidity": 0.9916,
+  "cat_target": {
+    "seasons": {
+      "Autumn": [
+        932.3,
+        857.0
+      ],
+      "Spring": [
+        759.2,
+        610.5
+      ],
+      "Summer": [
+        1026.1,
+        886.5
+      ],
+      "Winter": [
+        223.0,
+        197.5
+      ]
+    },
+    "holiday": {
+      "Holiday": [
+        483.2,
+        240.0
+      ],
+      "No Holiday": [
+        744.0,
+        568.0
+      ]
+    },
+    "day_of_week": {
+      "Fri": [
+        802.3,
+        640.0
+      ],
+      "Mon": [
+        744.8,
+        573.0
+      ],
+      "Sat": [
+        765.1,
+        589.0
+      ],
+      "Sun": [
+        639.8,
+        422.5
+      ],
+      "Thu": [
+        682.9,
+        455.5
+      ],
+      "Tue": [
+        721.1,
+        533.0
+      ],
+      "Wed": [
+        775.0,
+        608.5
+      ]
+    }
+  },
+  "peak_working": {
+    "hour": 18,
+    "median": 1946.0
+  },
+  "peak_working_morning": {
+    "hour": 8,
+    "median": 1564.0
+  },
+  "peak_weekend": {
+    "hour": 20,
+    "median": 1028.0
+  },
+  "we_8h_median": 412.0,
+  "day_type_counts": {
+    "working day": 4560,
+    "weekend / holiday": 2201
+  },
+  "grouped": {
+    "temperature": {
+      "Winter": [
+        -2.4,
+        8.1
+      ],
+      "Spring": [
+        13.0,
+        10.3
+      ],
+      "Summer": [
+        26.8,
+        6.6
+      ],
+      "Autumn": [
+        12.6,
+        11.7
+      ]
+    },
+    "humidity": {
+      "Winter": [
+        46.0,
+        28.0
+      ],
+      "Spring": [
+        58.0,
+        36.0
+      ],
+      "Summer": [
+        65.0,
+        27.0
+      ],
+      "Autumn": [
+        57.0,
+        31.0
+      ]
+    },
+    "solar_radiation": {
+      "Winter": [
+        0.0,
+        0.42
+      ],
+      "Spring": [
+        0.06,
+        1.28
+      ],
+      "Summer": [
+        0.16,
+        1.36
+      ],
+      "Autumn": [
+        0.0,
+        0.93
+      ]
+    },
+    "visibility": {
+      "Winter": [
+        1812.5,
+        1054.75
+      ],
+      "Spring": [
+        1325.0,
+        1309.25
+      ],
+      "Summer": [
+        1798.0,
+        916.0
+      ],
+      "Autumn": [
+        1904.0,
+        815.0
+      ]
+    }
+  },
+  "shape_in_train": [
+    6761,
+    13
+  ],
+  "shape_in_test": [
+    1704,
+    13
+  ],
+  "shape_out_train": [
+    6761,
+    22
+  ],
+  "shape_out_test": [
+    1704,
+    22
+  ],
+  "nan_out_train": 0,
+  "nan_out_test": 0,
+  "clip_bounds": {
+    "rainfall": 4.0,
+    "snowfall": 2.2
+  },
+  "clip_train": {
+    "rainfall": 60,
+    "snowfall": 56,
+    "any": 115
+  },
+  "clip_test": {
+    "rainfall": 16,
+    "snowfall": 41,
+    "any": 57
+  },
+  "clip_train_pct": 1.7,
+  "clip_test_pct": 3.35,
+  "humidity_zero_imputed": {
+    "train": 13,
+    "test": 4
+  },
+  "humidity_impute_value": 57.0,
+  "test_only_categories": {
+    "seasons": [],
+    "holiday": [],
+    "day_of_week": []
+  },
+  "feature_names": [
+    "hour_sin",
+    "hour_cos",
+    "temperature",
+    "visibility",
+    "humidity",
+    "wind_speed",
+    "solar_radiation",
+    "rainfall",
+    "snowfall",
+    "seasons_Autumn",
+    "seasons_Spring",
+    "seasons_Summer",
+    "seasons_Winter",
+    "holiday_Holiday",
+    "holiday_No Holiday",
+    "day_of_week_Fri",
+    "day_of_week_Mon",
+    "day_of_week_Sat",
+    "day_of_week_Sun",
+    "day_of_week_Thu",
+    "day_of_week_Tue",
+    "day_of_week_Wed"
+  ],
+  "before_after": {
+    "temperature": [
+      -0.16,
+      -0.16
+    ],
+    "humidity": [
+      0.09,
+      0.12
+    ],
+    "visibility": [
+      -0.72,
+      -0.72
+    ],
+    "wind_speed": [
+      0.91,
+      0.02
+    ],
+    "solar_radiation": [
+      1.48,
+      1.05
+    ],
+    "rainfall": [
+      15.32,
+      5.59
+    ],
+    "snowfall": [
+      9.47,
+      5.2
+    ]
+  },
+  "pca_pc1": 24.87,
+  "pca_pc2": 16.73,
+  "pca_pc3": 12.06,
+  "pca_pc12": 41.6,
+  "pca_n80": 7,
+  "pca_n90": 11,
+  "pca_n95": 15,
+  "pca_rank": 19,
+  "pca_top_loadings": {
+    "PC1": [
+      [
+        "humidity",
+        0.54
+      ],
+      [
+        "solar_radiation",
+        -0.49
+      ],
+      [
+        "wind_speed",
+        -0.39
+      ],
+      [
+        "visibility",
+        -0.39
+      ],
+      [
+        "rainfall",
+        0.25
+      ]
+    ],
+    "PC2": [
+      [
+        "temperature",
+        0.69
+      ],
+      [
+        "snowfall",
+        -0.36
+      ],
+      [
+        "solar_radiation",
+        0.31
+      ],
+      [
+        "rainfall",
+        0.27
+      ],
+      [
+        "humidity",
+        0.26
+      ]
+    ],
+    "PC3": [
+      [
+        "snowfall",
+        0.52
+      ],
+      [
+        "visibility",
+        -0.43
+      ],
+      [
+        "rainfall",
+        0.41
+      ],
+      [
+        "wind_speed",
+        0.39
+      ],
+      [
+        "solar_radiation",
+        0.29
+      ]
+    ]
+  },
+  "pc1_corr_log_target": -0.449,
+  "pc2_corr_log_target": 0.382,
+  "tsne_kl_30": 1.173,
+  "tsne_kl_50": 1.218,
+  "versions": {
+    "pandas": "2.3.3",
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1",
+    "umap-learn": "0.5.12",
+    "matplotlib": "3.11.2",
+    "python": "3.12.11"
+  }
+}

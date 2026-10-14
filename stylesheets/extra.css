@@ -1,0 +1,35 @@
+/* Team grid on the home page */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.team-grid figure {
+  margin: 0;
+  width: auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 44em) {
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.team-grid img.team-photo {
+  width: 100%;
+  max-width: 10rem;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+  border: 3px solid var(--md-default-fg-color--lightest);
+}
+
+.team-grid figcaption {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  max-width: none;
+}

@@ -1,0 +1,1987 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Classification and regression EDAs for Insper's Artificial Neural Networks and Deep Learning, 2026.2">
+      
+      
+        <meta name="author" content="Ana Helena Caiafa, Thais Rocha, Esther Caroline Rodrigues, Carolina Eskenazi">
+      
+      
+        <link rel="canonical" href="https://thaisrs165.github.io/exploratory_data_analysis/projects/eda/stage-1/">
+      
+      
+        <link rel="prev" href="../stage-0/">
+      
+      
+        <link rel="next" href="../stage-2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Classification: 1. Initial inspection - Exploratory Data Analysis 26.2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-initial-inspection" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Exploratory Data Analysis 26.2" class="md-header__button md-logo" aria-label="Exploratory Data Analysis 26.2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Exploratory Data Analysis 26.2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Classification: 1. Initial inspection
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_3" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Thaisrs165/exploratory_data_analysis" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Thaisrs165/exploratory_data_analysis
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../stage-0/" class="md-tabs__link">
+          
+  
+  
+  Classification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../eda-regression/stage-0/" class="md-tabs__link">
+          
+  
+  
+  Regression
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Exploratory Data Analysis 26.2" class="md-nav__button md-logo" aria-label="Exploratory Data Analysis 26.2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Exploratory Data Analysis 26.2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Thaisrs165/exploratory_data_analysis" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    Thaisrs165/exploratory_data_analysis
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Initial inspection
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Initial inspection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1a-data-dictionary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1A. Data dictionary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1b-data-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1B. Data quality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1c-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1C. Target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1d-traintest-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1D. Train/test split
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Univariate analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bivariate &amp; multivariate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full report (one page)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Regression
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0. Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Initial inspection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Univariate analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bivariate &amp; multivariate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/stage-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eda-regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full report (one page)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1a-data-dictionary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1A. Data dictionary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1b-data-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1B. Data quality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1c-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1C. Target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1d-traintest-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1D. Train/test split
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../stage-0/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Classification
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1-initial-inspection">1. Initial inspection<a class="headerlink" href="#1-initial-inspection" title="Permanent link">¶</a></h1>
+<div class="admonition tip">
+<p>Classification EDA, section 2 of 7. Use <strong>Next</strong> at the bottom to keep reading, or open the <a href="../">full report on one page</a>.</p>
+</div>
+<h2 id="1a-data-dictionary">1A. Data dictionary<a class="headerlink" href="#1a-data-dictionary" title="Permanent link">¶</a></h2>
+<p><strong>Source.</strong> UCI Machine Learning Repository, <em>Bank Marketing</em> (id 222), created by Paulo Cortez (Univ. Minho) and Sergio Moro (ISCTE-IUL), CC BY 4.0. Citation: S. Moro, R. Laureano and P. Cortez, <em>Using Data Mining for Bank Direct Marketing: An Application of the CRISP-DM Methodology</em>, ESM'2011, pp. 117-121.</p>
+<p><strong>Download steps</strong> (reproduced by <code>scripts/part1_download_data.py</code>):</p>
+<ol>
+<li>Download <code>https://archive.ics.uci.edu/static/public/222/bank+marketing.zip</code> (the download link on the UCI page above).</li>
+<li>The archive contains two nested zips: <code>bank.zip</code> (older version) and <code>bank-additional.zip</code> (newer version). Only <code>bank.zip</code> is used.</li>
+<li>Extract <code>bank-full.csv</code> and <code>bank-names.txt</code> from <code>bank.zip</code> to <code>data/raw/</code>. The file is <code>;</code>-separated with quoted strings and a header row.</li>
+<li><code>bank-additional-names.txt</code> is also extracted, <strong>only as documentation</strong>: it holds UCI's official note on <code>duration</code> leakage (quoted in 1B). No <code>bank-additional</code> data is used.</li>
+<li>Recorded: download time 2026-10-13T21:56:18+00:00 (UTC); <code>bank-full.csv</code> is 4,610,348 bytes, SHA-256 <code>d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d</code> (see <code>data/raw/part1_download_log.json</code>).</li>
+</ol>
+<p><strong>What a row is.</strong> One row is one client contacted in a direct-marketing phone campaign, with the attributes of their <strong>last contact</strong> in the current campaign. The file has 45,211 rows ordered by date (May 2008 to November 2010). UCI notes that a client often needed more than one contact; <code>campaign</code> counts them.</p>
+<p><strong>Schema check.</strong> Read with <code>pandas.read_csv(sep=";")</code>: 45,211 rows x 17 columns. Columns with an integer dtype (<code>int64</code>) are the numerical features (7). Columns with an <code>object</code> dtype other than <code>y</code> are the categorical features (9). This matches the expected 7 + 9 + target. The script asserts this, so it fails if the file changes.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">column</th>
+<th style="text-align: left;">meaning</th>
+<th style="text-align: left;">role</th>
+<th style="text-align: left;">pandas dtype</th>
+<th style="text-align: left;">unit</th>
+<th style="text-align: left;">observed values / range</th>
+<th style="text-align: left;">Part 1 status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>age</code></td>
+<td style="text-align: left;">Client age</td>
+<td style="text-align: left;">numerical</td>
+<td style="text-align: left;">int64</td>
+<td style="text-align: left;">years</td>
+<td style="text-align: left;">18 to 95</td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>job</code></td>
+<td style="text-align: left;">Type of job</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>admin.</code>, <code>blue-collar</code>, <code>entrepreneur</code>, <code>housemaid</code>, <code>management</code>, <code>retired</code>, <code>self-employed</code>, <code>services</code>, <code>student</code>, <code>technician</code>, <code>unemployed</code>, <code>unknown</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>marital</code></td>
+<td style="text-align: left;">Marital status (<code>divorced</code> = divorced or widowed)</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>divorced</code>, <code>married</code>, <code>single</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>education</code></td>
+<td style="text-align: left;">Education level</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>primary</code>, <code>secondary</code>, <code>tertiary</code>, <code>unknown</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>default</code></td>
+<td style="text-align: left;">Has credit in default?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>no</code>, <code>yes</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>balance</code></td>
+<td style="text-align: left;">Average yearly balance</td>
+<td style="text-align: left;">numerical</td>
+<td style="text-align: left;">int64</td>
+<td style="text-align: left;">euros</td>
+<td style="text-align: left;">-8,019 to 102,127</td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>housing</code></td>
+<td style="text-align: left;">Has housing loan?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>no</code>, <code>yes</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>loan</code></td>
+<td style="text-align: left;">Has personal loan?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>no</code>, <code>yes</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contact</code></td>
+<td style="text-align: left;">Contact communication type (last contact, current campaign)</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>cellular</code>, <code>telephone</code>, <code>unknown</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>day</code></td>
+<td style="text-align: left;">Day of month of the last contact</td>
+<td style="text-align: left;">numerical</td>
+<td style="text-align: left;">int64</td>
+<td style="text-align: left;">day (1-31)</td>
+<td style="text-align: left;">1 to 31</td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>month</code></td>
+<td style="text-align: left;">Month of year of the last contact</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>jan</code>, <code>feb</code>, <code>mar</code>, <code>apr</code>, <code>may</code>, <code>jun</code>, <code>jul</code>, <code>aug</code>, <code>sep</code>, <code>oct</code>, <code>nov</code>, <code>dec</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>duration</code></td>
+<td style="text-align: left;">Duration of the last contact</td>
+<td style="text-align: left;">numerical</td>
+<td style="text-align: left;">int64</td>
+<td style="text-align: left;">seconds</td>
+<td style="text-align: left;">0 to 4,918</td>
+<td style="text-align: left;">excluded (leakage)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>campaign</code></td>
+<td style="text-align: left;">Contacts performed during this campaign for this client, incl. the last one</td>
+<td style="text-align: left;">numerical</td>
+<td style="text-align: left;">int64</td>
+<td style="text-align: left;">count</td>
+<td style="text-align: left;">1 to 63</td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pdays</code></td>
+<td style="text-align: left;">Days since the client was last contacted in a previous campaign; -1 = not previously contacted</td>
+<td style="text-align: left;">numerical</td>
+<td style="text-align: left;">int64</td>
+<td style="text-align: left;">days</td>
+<td style="text-align: left;">-1 to 871</td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>previous</code></td>
+<td style="text-align: left;">Contacts performed before this campaign for this client</td>
+<td style="text-align: left;">numerical</td>
+<td style="text-align: left;">int64</td>
+<td style="text-align: left;">count</td>
+<td style="text-align: left;">0 to 275</td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>poutcome</code></td>
+<td style="text-align: left;">Outcome of the previous marketing campaign</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>failure</code>, <code>other</code>, <code>success</code>, <code>unknown</code></td>
+<td style="text-align: left;">retained</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>y</code></td>
+<td style="text-align: left;">Target: has the client subscribed to a term deposit?</td>
+<td style="text-align: left;">target</td>
+<td style="text-align: left;">object</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"><code>no</code>, <code>yes</code></td>
+<td style="text-align: left;">target</td>
+</tr>
+</tbody>
+</table>
+<p>Notes: <code>day</code> and <code>month</code> record the date of the last contact. There is no year column, even though the data spans 2008-2010. <code>day</code> is kept numerical, following UCI, but it is a calendar position rather than a quantity.</p>
+<h2 id="1b-data-quality">1B. Data quality<a class="headerlink" href="#1b-data-quality" title="Permanent link">¶</a></h2>
+<p><strong>Missing values.</strong> There are 0 <code>NaN</code> values in the whole file. Missing information is instead coded as the literal level <code>"unknown"</code> in <code>job</code>, <code>education</code>, <code>contact</code>, <code>poutcome</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">column</th>
+<th style="text-align: right;">NaN count</th>
+<th style="text-align: right;">NaN %</th>
+<th style="text-align: right;">"unknown" count</th>
+<th style="text-align: right;">"unknown" %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>age</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>job</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">288</td>
+<td style="text-align: right;">0.64</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>marital</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>education</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1857</td>
+<td style="text-align: right;">4.11</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>default</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>balance</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>housing</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>loan</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contact</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">13020</td>
+<td style="text-align: right;">28.80</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>day</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>month</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>duration</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>campaign</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pdays</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>previous</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>poutcome</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">36959</td>
+<td style="text-align: right;">81.75</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>y</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>"unknown"</code> counts on the full data: <code>job</code> 288 (0.64%), <code>education</code> 1,857 (4.11%), <code>contact</code> 13,020 (28.80%), <code>poutcome</code> 36,959 (81.75%). 37,369 rows (82.65%) have at least one <code>"unknown"</code>. Excluding <code>poutcome</code>, the figure is 14,304 rows (31.64%). Dropping such rows is therefore not an option.</li>
+<li><strong>Decision: keep <code>"unknown"</code> as its own category.</strong> The data supports this. (i) For <code>poutcome</code>, <code>"unknown"</code> is structural: it almost exactly marks "not previously contacted" (see the <code>pdays</code> section). (ii) For <code>contact</code>, <code>"unknown"</code> is a recording-practice artifact: the first 12,657 rows in file (time) order are all <code>"unknown"</code>, and 97.21% of all <code>contact = "unknown"</code> rows fall in the first 30% of the file. (iii) <code>"unknown"</code> levels have their own subscription rates (for <code>contact</code>: 4.07% vs 14.78% when known). This means the values are not missing completely at random, and imputing them with the mode would erase signal.</li>
+</ul>
+<p><strong>Duplicates.</strong> There are 0 exact duplicate rows among all 17 columns. After <code>duration</code> is excluded, 16 rows duplicate an earlier row (31 rows involved, in 15 groups). None of these groups has conflicting labels (0 groups with different <code>y</code>). <strong>Decision: keep them.</strong> They differed only by call duration, so they are most likely different contacts with identical profiles rather than copy errors, and they are a negligible share of the data.</p>
+<p><strong><code>pdays = -1</code> sentinel.</strong> UCI documents <code>-1</code> as "client was not previously contacted". It is not an impossible value but a code, and the data confirms this:</p>
+<ul>
+<li>36,954 rows (81.74%) have <code>pdays = -1</code>. Exactly the same rows have <code>previous = 0</code> (36,954 rows; 0 mismatches).</li>
+<li>No other negative value and no <code>pdays = 0</code> exist (0 and 0 rows). Real values run from 1 to 871 days.</li>
+<li>Treating <code>-1</code> as a number is misleading. The mean of <code>pdays</code> is 40.20 with the sentinel and 224.58 among previously contacted clients only.</li>
+<li>Cross-tab with <code>poutcome</code>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">pdays group</th>
+<th style="text-align: right;">failure</th>
+<th style="text-align: right;">other</th>
+<th style="text-align: right;">success</th>
+<th style="text-align: right;">unknown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">pdays = -1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36954</td>
+</tr>
+<tr>
+<td style="text-align: left;">pdays &gt;= 1</td>
+<td style="text-align: right;">4901</td>
+<td style="text-align: right;">1840</td>
+<td style="text-align: right;">1511</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Subscription rate: 9.16% for never-contacted clients vs 23.07% for previously contacted ones. The sentinel is informative, so the "not previously contacted" information must be preserved in preprocessing (for example, a binary flag plus a <code>pdays</code> value that is masked or neutral for those clients).</li>
+</ul>
+<p><strong>Impossible, inconsistent and implausible values</strong> (full data):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">check</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">interpretation</th>
+<th style="text-align: left;">action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">age &lt; 18 or &gt; 100</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">impossible for a bank client contact list</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">age &gt; 90</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">plausible but extreme</td>
+<td style="text-align: left;">keep</td>
+</tr>
+<tr>
+<td style="text-align: left;">day outside 1-31</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">impossible</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">day exceeds days in its month (e.g. 31 apr, 30 feb)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">impossible calendar date</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">campaign &lt; 1 (must include the last contact)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">impossible by definition</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">previous &lt; 0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">impossible</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">pdays &lt; -1, or pdays = 0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">impossible / undefined code</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">pdays = -1 while previous &gt; 0 (or the reverse)</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">inconsistent</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">poutcome = unknown while previous &gt; 0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">inconsistent: a previous contact exists but its outcome is unrecorded</td>
+<td style="text-align: left;">keep; treat as category</td>
+</tr>
+<tr>
+<td style="text-align: left;">poutcome known while previous = 0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">inconsistent</td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">balance &lt; 0</td>
+<td style="text-align: right;">3766</td>
+<td style="text-align: left;">valid: overdrawn account (balance is not bounded at 0)</td>
+<td style="text-align: left;">keep</td>
+</tr>
+<tr>
+<td style="text-align: left;">duration = 0 s</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">consistent with no conversation; all have y = no</td>
+<td style="text-align: left;">moot: duration excluded</td>
+</tr>
+<tr>
+<td style="text-align: left;">job = student and age &gt; 40</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">implausible but possible</td>
+<td style="text-align: left;">keep</td>
+</tr>
+<tr>
+<td style="text-align: left;">job = retired and age &lt; 40</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">implausible but possible (early/disability retirement)</td>
+<td style="text-align: left;">keep</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>No impossible values were found. The only true inconsistency is 5 rows with <code>previous &gt; 0</code> but <code>poutcome = "unknown"</code>. These are kept, because the category already represents "unrecorded".</li>
+<li><code>balance &lt; 0</code> in 3,766 rows (8.33%) is <strong>not</strong> an error: the average balance of an overdrawn account can be negative.</li>
+</ul>
+<p><strong>Outliers.</strong> These are quantified with the 1.5 x IQR rule on the training set in 2A (Figure 3). <strong>Decision: no outliers are removed in Part 1.</strong> Extreme <code>balance</code>, <code>campaign</code> and <code>previous</code> values are plausible, and removing them would change the population. Part 2 should prefer robust or monotone transforms (see Handoff).</p>
+<p><strong>Identifiers and constants.</strong> There is no ID column. The highest unique-value ratio is <code>balance</code> with 7,168 distinct values (0.159 of rows), which is a measurement, not an identifier. There are 0 constant columns. The most dominant level is in <code>default</code> (98.20% <code>no</code>; <code>default = yes</code> has only 815 rows, 1.80%). It is nearly constant but kept, as Part 2 can decide whether it carries enough signal.</p>
+<p><strong>Leakage investigation.</strong></p>
+<ol>
+<li><strong><code>duration</code> (excluded).</strong> UCI's attribute note (in <code>bank-additional-names.txt</code> from the same official archive) says: <em>"this attribute highly affects the output target (e.g., if duration=0 then y='no'). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model."</em> The data confirms this:</li>
+<li>Spearman correlation of <code>duration</code> with <code>y</code> is 0.342. The highest correlation among the other numerical features is 0.169 (<code>previous</code>).</li>
+<li>There are 3 rows with <code>duration = 0</code>. All of them have <code>y = no</code> (check result: yes), exactly as UCI's note says.</li>
+<li>The subscription rate rises steadily with call length:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">duration (s)</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">subscribed</th>
+<th style="text-align: right;">subscription rate %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td style="text-align: left;">1-60</td>
+<td style="text-align: right;">4763</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.19</td>
+</tr>
+<tr>
+<td style="text-align: left;">61-120</td>
+<td style="text-align: right;">9278</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">2.18</td>
+</tr>
+<tr>
+<td style="text-align: left;">121-300</td>
+<td style="text-align: right;">18893</td>
+<td style="text-align: right;">1620</td>
+<td style="text-align: right;">8.57</td>
+</tr>
+<tr>
+<td style="text-align: left;">301-600</td>
+<td style="text-align: right;">8484</td>
+<td style="text-align: right;">1625</td>
+<td style="text-align: right;">19.15</td>
+</tr>
+<tr>
+<td style="text-align: left;">601-4918</td>
+<td style="text-align: right;">3790</td>
+<td style="text-align: right;">1833</td>
+<td style="text-align: right;">48.36</td>
+</tr>
+</tbody>
+</table>
+<p>Our task is to predict subscription <strong>before</strong> calling, so <code>duration</code> cannot be a predictor. <strong>It is dropped before the split and is not analysed further.</strong></p>
+<ol>
+<li><strong>Row order (time) - not a column, but a leakage risk.</strong> The file is sorted by date. Splitting the rows into deciles by file position shows strong drift: the subscription rate goes from 3.0% in the first decile to 47.1% in the last.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">row decile (file order)</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">subscription rate %</th>
+<th style="text-align: right;">contact = unknown %</th>
+<th style="text-align: right;">poutcome = unknown %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">D1</td>
+<td style="text-align: right;">4522</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">100.0</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">D2</td>
+<td style="text-align: right;">4521</td>
+<td style="text-align: right;">3.7</td>
+<td style="text-align: right;">100.0</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">D3</td>
+<td style="text-align: right;">4521</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">79.9</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">D4</td>
+<td style="text-align: right;">4521</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">D5</td>
+<td style="text-align: right;">4521</td>
+<td style="text-align: right;">6.1</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">D6</td>
+<td style="text-align: right;">4521</td>
+<td style="text-align: right;">6.2</td>
+<td style="text-align: right;">1.6</td>
+<td style="text-align: right;">83.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">D7</td>
+<td style="text-align: right;">4520</td>
+<td style="text-align: right;">10.5</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">71.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">D8</td>
+<td style="text-align: right;">4522</td>
+<td style="text-align: right;">13.1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">61.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">D9</td>
+<td style="text-align: right;">4521</td>
+<td style="text-align: right;">16.1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">60.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">D10</td>
+<td style="text-align: right;">4521</td>
+<td style="text-align: right;">47.1</td>
+<td style="text-align: right;">5.6</td>
+<td style="text-align: right;">41.2</td>
+</tr>
+</tbody>
+</table>
+<p>The row index must <strong>never</strong> be used as a feature. A random stratified split (required here) mixes periods, so test performance will be optimistic about the future. We record this as a limitation; it is not corrected in Part 1.</p>
+<ol>
+<li><code>poutcome</code>, <code>pdays</code> and <code>previous</code> describe <em>previous</em> campaigns, so they are known before the call. <code>campaign</code> includes the current (last) call, but the number of attempts so far is known when deciding on the next call, so it is kept. <code>contact</code>, <code>day</code> and <code>month</code> describe the last contact. They are plausible as scheduling attributes, but their link to the data-collection period (see <code>contact</code> above) should be kept in mind.</li>
+</ol>
+<p><strong>Columns dropped and reasons.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>duration</code></td>
+<td>Target leakage: only known during or after the call (UCI note and evidence above).</td>
+</tr>
+</tbody>
+</table>
+<p>No other columns are dropped. <strong>Result: original 45,211 x 17 (7 numerical + 9 categorical + <code>y</code>); after the exclusion 45,211 x 16 (6 numerical + 9 categorical + <code>y</code>).</strong> No rows are removed.</p>
+<h2 id="1c-target">1C. Target<a class="headerlink" href="#1c-target" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">class</th>
+<th style="text-align: right;">count</th>
+<th style="text-align: right;">percent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">39922</td>
+<td style="text-align: right;">88.30</td>
+</tr>
+<tr>
+<td style="text-align: left;">yes</td>
+<td style="text-align: right;">5289</td>
+<td style="text-align: right;">11.70</td>
+</tr>
+</tbody>
+</table>
+<p>The data is imbalanced, with a ratio of <strong>7.55 : 1</strong> (<code>no</code> : <code>yes</code>). Always predicting <code>no</code> would reach 88.30% accuracy. Part 2 should evaluate with metrics that are robust to imbalance (for example PR-AUC, recall/precision on <code>yes</code>, balanced accuracy) and keep stratification.</p>
+<h2 id="1d-traintest-split">1D. Train/test split<a class="headerlink" href="#1d-traintest-split" title="Permanent link">¶</a></h2>
+<ul>
+<li><code>sklearn.model_selection.train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)</code>, with shuffling (the default).</li>
+<li><code>X</code> holds the 15 retained predictors (<code>duration</code> excluded), and <code>y</code> is encoded as <code>yes = 1</code>, <code>no = 0</code>.</li>
+<li>The split is done <strong>before any preprocessing is fitted</strong>. No imputation, encoding or scaling is fitted in Part 1. Stages 2-3 below use the <strong>training set only</strong>, so nothing is learned from the test set.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">set</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">share of full %</th>
+<th style="text-align: right;">y = no</th>
+<th style="text-align: right;">y = yes</th>
+<th style="text-align: right;">y = yes %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">full</td>
+<td style="text-align: right;">45211</td>
+<td style="text-align: right;">100.00</td>
+<td style="text-align: right;">39922</td>
+<td style="text-align: right;">5289</td>
+<td style="text-align: right;">11.70</td>
+</tr>
+<tr>
+<td style="text-align: left;">train</td>
+<td style="text-align: right;">36168</td>
+<td style="text-align: right;">80.00</td>
+<td style="text-align: right;">31937</td>
+<td style="text-align: right;">4231</td>
+<td style="text-align: right;">11.70</td>
+</tr>
+<tr>
+<td style="text-align: left;">test</td>
+<td style="text-align: right;">9043</td>
+<td style="text-align: right;">20.00</td>
+<td style="text-align: right;">7985</td>
+<td style="text-align: right;">1058</td>
+<td style="text-align: right;">11.70</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Train: 36,168 rows (31,937 <code>no</code>, 4,231 <code>yes</code>, 11.70% positive).</li>
+<li>Test: 9,043 rows (7,985 <code>no</code>, 1,058 <code>yes</code>, 11.70% positive).</li>
+<li>The exact rows are listed in <code>part1_outputs/train_test_split_indices.csv</code> (<code>row_id</code> = 0-based row position in <code>bank-full.csv</code>).</li>
+</ul>
+<hr>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../stage-0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0. Proposal">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                0. Proposal
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../stage-2/" class="md-footer__link md-footer__link--next" aria-label="Next: 2. Univariate analysis">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                2. Univariate analysis
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.code.select", "content.tooltips", "navigation.instant", "navigation.instant.progress", "navigation.tabs", "navigation.footer", "navigation.top", "navigation.path", "navigation.tracking", "navigation.expand", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

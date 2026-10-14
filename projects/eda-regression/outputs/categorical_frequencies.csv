@@ -1,0 +1,16 @@
+feature,level,count,pct,set
+seasons,Summer,1752,25.9133,train
+seasons,Winter,1728,25.5583,train
+seasons,Spring,1728,25.5583,train
+seasons,Autumn,1553,22.9700,train
+holiday,No Holiday,6425,95.0303,train
+holiday,Holiday,336,4.9697,train
+day_of_week,Sun,1032,15.2640,train
+day_of_week,Wed,1008,14.9090,train
+day_of_week,Thu,1008,14.9090,train
+day_of_week,Mon,960,14.1991,train
+day_of_week,Tue,960,14.1991,train
+day_of_week,Fri,912,13.4891,train
+day_of_week,Sat,881,13.0306,train
+functioning_day,Yes,8465,96.6324,full data
+functioning_day,No,295,3.3676,full data

@@ -1,0 +1,47 @@
+{
+  "function": "sklearn.model_selection.train_test_split",
+  "test_size": 0.2,
+  "train_size": 0.8,
+  "stratify": "y (encoded yes=1, no=0)",
+  "random_state": 42,
+  "shuffle": true,
+  "input_file": "data/raw/bank-full.csv",
+  "input_sha256": "d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d",
+  "row_id": "0-based row position in bank-full.csv (pandas default index after read_csv(sep=';'))",
+  "indices_file": "docs/projects/eda/part1_outputs/train_test_split_indices.csv",
+  "X_columns_order": [
+    "age",
+    "balance",
+    "day",
+    "campaign",
+    "pdays",
+    "previous",
+    "job",
+    "marital",
+    "education",
+    "default",
+    "housing",
+    "loan",
+    "contact",
+    "month",
+    "poutcome"
+  ],
+  "sizes": {
+    "full": {
+      "rows": 45211,
+      "no": 39922,
+      "yes": 5289
+    },
+    "train": {
+      "rows": 36168,
+      "no": 31937,
+      "yes": 4231
+    },
+    "test": {
+      "rows": 9043,
+      "no": 7985,
+      "yes": 1058
+    }
+  },
+  "reproduce": "X = df[numerical + categorical]; y = (df['y'] == 'yes').astype(int); train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)"
+}

@@ -1,0 +1,15 @@
+check,rows,interpretation,action
+age < 18 or > 100,0,impossible for a bank client contact list,none
+age > 90,7,plausible but extreme,keep
+day outside 1-31,0,impossible,none
+"day exceeds days in its month (e.g. 31 apr, 30 feb)",0,impossible calendar date,none
+campaign < 1 (must include the last contact),0,impossible by definition,none
+previous < 0,0,impossible,none
+"pdays < -1, or pdays = 0",0,impossible / undefined code,none
+pdays = -1 while previous > 0 (or the reverse),0,inconsistent,none
+poutcome = unknown while previous > 0,5,inconsistent: a previous contact exists but its outcome is unrecorded,keep; treat as category
+poutcome known while previous = 0,0,inconsistent,none
+balance < 0,3766,valid: overdrawn account (balance is not bounded at 0),keep
+duration = 0 s,3,consistent with no conversation; all have y = no,moot: duration excluded
+job = student and age > 40,10,implausible but possible,keep
+job = retired and age < 40,25,implausible but possible (early/disability retirement),keep

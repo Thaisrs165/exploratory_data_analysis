@@ -1,0 +1,26 @@
+quantity,Part 1,recomputed in Part 2
+bank-full.csv SHA-256 (LF line endings),d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d,d1513ec63b385506f7cfce9f2c5caa9fe99e7ba4e8c3fa264b3aaf0f849ed32d
+rows x columns of bank-full.csv,"45,211 x 17","45,211 x 17"
+retained numerical features,"['age', 'balance', 'day', 'campaign', 'pdays', 'previous']","['age', 'balance', 'day', 'campaign', 'pdays', 'previous']"
+retained categorical features,"['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month', 'poutcome']","['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month', 'poutcome']"
+excluded columns,['duration'],['duration']
+NaN values in the file,0,0
+minority class (y = yes) share,11.70%,11.70%
+imbalance ratio no : yes,7.55,7.55
+"column with most ""unknown""",poutcome,poutcome
+"poutcome = ""unknown"" (full data)","36,959 (81.75%)","36,959 (81.75%)"
+pdays = -1 rows equal to previous = 0 rows (mismatches),0,0
+train row ids identical to train_test_split_indices.csv,True,True
+test row ids identical to train_test_split_indices.csv,True,True
+train rows / positives,"36,168 / 4,231","36,168 / 4,231"
+test rows / positives,"9,043 / 1,058","9,043 / 1,058"
+"most correlated numerical pair (train, absolute Spearman)",pdays - previous,pdays - previous
+its Spearman rho,0.986,0.986
+its Pearson r,0.439,0.439
+balance: 1.5 x IQR outliers (train),"3,770","3,770"
+balance: skew (train),8.34,8.34
+campaign: 1.5 x IQR outliers (train),"2,465","2,465"
+campaign: skew (train),4.94,4.94
+previous: 1.5 x IQR outliers (train),"6,584","6,584"
+previous: skew (train),45.03,45.03
+one-hot width (sum of train cardinalities),44,44
