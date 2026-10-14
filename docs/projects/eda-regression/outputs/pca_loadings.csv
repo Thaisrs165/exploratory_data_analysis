@@ -1,0 +1,23 @@
+,PC1,PC2,PC3
+hour_sin,0.1895,-0.0406,-0.0645
+hour_cos,0.2439,-0.1409,-0.2889
+temperature,-0.0869,0.6901,-0.1606
+visibility,-0.3871,-0.1768,-0.4262
+humidity,0.5383,0.2627,0.0908
+wind_speed,-0.3894,-0.0248,0.3946
+solar_radiation,-0.4862,0.3089,0.2901
+rainfall,0.2451,0.2700,0.4084
+snowfall,0.0948,-0.3626,0.5214
+seasons_Autumn,0.0029,0.0019,-0.0590
+seasons_Spring,0.0032,0.0428,0.0463
+seasons_Summer,-0.0016,0.1984,-0.0704
+seasons_Winter,-0.0045,-0.2432,0.0830
+holiday_Holiday,-0.0005,-0.0106,0.0067
+holiday_No Holiday,0.0005,0.0106,-0.0067
+day_of_week_Fri,-0.0098,-0.0010,-0.0159
+day_of_week_Mon,0.0045,0.0205,-0.0036
+day_of_week_Sat,-0.0076,0.0035,-0.0014
+day_of_week_Sun,0.0037,-0.0055,-0.0026
+day_of_week_Thu,0.0099,-0.0161,0.0170
+day_of_week_Tue,-0.0028,-0.0108,0.0022
+day_of_week_Wed,0.0020,0.0094,0.0043

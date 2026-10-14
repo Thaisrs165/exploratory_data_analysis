@@ -1,0 +1,13 @@
+{
+  "source_page": "https://archive.ics.uci.edu/dataset/560/seoul+bike+sharing+demand",
+  "download_url": "https://archive.ics.uci.edu/static/public/560/seoul+bike+sharing+demand.zip",
+  "downloaded_at_utc": "2026-10-14T19:34:22+00:00",
+  "zip_sha256": "139e9908f0a3544bb222386855c9ce107e96467306bb8e4ce936aab59e7baac4",
+  "files": {
+    "SeoulBikeData.csv": {
+      "from": "seoul+bike+sharing+demand.zip > SeoulBikeData.csv",
+      "bytes": 604166,
+      "sha256": "373339b71a8935d69e9af0abf26a70744632119862eeb3919efb389a7b749c60"
+    }
+  }
+}

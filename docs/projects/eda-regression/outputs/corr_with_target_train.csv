@@ -1,0 +1,10 @@
+,pearson,spearman
+temperature,0.5646,0.6167
+dew_point,0.4091,0.4256
+hour,0.4321,0.4232
+solar_radiation,0.2742,0.4128
+rainfall,-0.1181,-0.2746
+snowfall,-0.1443,-0.2408
+humidity,-0.1865,-0.2053
+visibility,0.2089,0.1898
+wind_speed,0.1141,0.1412
