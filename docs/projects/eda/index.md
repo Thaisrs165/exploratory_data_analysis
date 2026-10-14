@@ -1,3 +1,18 @@
+---
+project: Classification EDA - UCI Bank Marketing
+task: classification
+dataset_url: https://archive.ics.uci.edu/dataset/222/bank%2Bmarketing
+team:
+  - Ana Helena Caiafa
+  - Thais Rocha
+  - Esther Caroline Rodrigues
+  - Carolina Eskenazi
+ai_use: >-
+  Claude Code (Anthropic) was used to help write and run the analysis scripts and
+  the preprocessing pipeline and to draft the report text. The team reviewed the
+  code, checked every number against the generated outputs, and every member can
+  explain every number and decision in this report.
+---
 <!--
   GENERATED FILE - do not edit docs/projects/eda/index.md by hand.
   Stages 0-3 are copied unchanged from docs/projects/eda/part1_draft.md (python scripts/part1_eda.py).
@@ -8,8 +23,6 @@
 
 # Classification EDA - UCI Bank Marketing
 
-> **Status: PENDING INSTRUCTOR APPROVAL.** The repository contains no record of instructor approval for this dataset. Approval is a prerequisite, so the proposal and the whole EDA below are provisional and must not be read as approved or final until approval is documented.
->
 > Structure: stages 0-3 (Part 1) and stages 4-5 (Part 2). No model is trained anywhere in this report.
 
 ---
@@ -24,7 +37,7 @@
 | Target | `y`: did the client subscribe to a term deposit? (`yes` / `no`, binary) |
 | Features (original) | **7 numerical**, **9 categorical** (verified from the data, see 1A) |
 | Features (after excluding `duration`) | **6 numerical**, **9 categorical** = 15 predictors |
-| Approval status | **Pending.** No approval evidence exists in the repository. |
+| Approval status | **Approved** by the instructor. |
 
 **Motivation.** Direct-marketing calls are expensive, and only 11.70% of the contacted clients in this dataset subscribed. A classifier that ranks clients by their chance of subscribing *before* a call is made could help the bank prioritise calls. The dataset is real (a Portuguese bank, May 2008 to November 2010), well documented, and has a mix of numerical and categorical features and a clear binary target, so it fits a classification EDA.
 
@@ -826,13 +839,12 @@ The last command fits the pipeline on the training set and prints the shapes, th
 | 8 | **Weak, non-linear signal.** No projection separates the classes, and the age and campaign effects are non-linear. | Figures 11, 13, 17, 18, 19 | Start from a logistic-regression baseline on the same features, then a small network with hidden layers. Expect modest gains, and compare against the baseline instead of against published results that use `duration`. |
 | 9 | **Over-reading the embeddings.** t-SNE and UMAP cluster sizes and distances are not quantitative. | 4B | Use them only as diagnostics. Do not feed them to the model or pick thresholds from them. |
 | 10 | **Feature-level duplicates** (16 rows) could sit on both sides of the split. | 1B | Negligible share; kept, as decided in Part 1. If cross-validation is used, note that it does not affect the conclusions. |
-| 11 | **Approval is pending.** The dataset has not been approved by the instructor. | Section 0 | Obtain and document the approval before treating this EDA as final. If the dataset is rejected, the scripts are reusable but every number changes. |
 
 ### 5C. Summary table
 
 | # | Item | Value |
 |---|---|---|
-| 1 | Dataset, task and target | UCI Bank Marketing (`bank-full.csv`, older full version). Binary classification. Target `y`: did the client subscribe to a term deposit (`yes` = 1, `no` = 0). **Instructor approval: pending.** |
+| 1 | Dataset, task and target | UCI Bank Marketing (`bank-full.csv`, older full version). Binary classification. Target `y`: did the client subscribe to a term deposit (`yes` = 1, `no` = 0). |
 | 2 | Instances x features (numerical / categorical) | 45,211 x 16 input features (7 numerical / 9 categorical) plus the target. After excluding `duration`: 45,211 x 15 (6 numerical / 9 categorical). |
 | 3 | Column with the most missing values and its percentage | No column has `NaN` (0.00% everywhere). Missing information is coded as `"unknown"`: the highest share is `poutcome`, 36,959 (81.75%) of the full data. |
 | 4 | Dropped columns and reasons | `duration`: target leakage, known only during or after the call (1B). No other column and no row is dropped. |
@@ -842,8 +854,6 @@ The last command fits the pipeline on the training set and prints the shapes, th
 | 8 | Rows affected by the outlier strategy | Clipping to train P1-P99 of `balance`, `campaign`, `previous`: 1,372 training rows (3.79%) and 333 test rows (3.68%) have at least one clipped value. 0 rows removed. |
 | 9 | Variance explained by PC1 + PC2 | 27.45% (PC1 14.90% + PC2 12.55%), PCA on the 51 preprocessed training features. |
 | 10 | Train / test shapes after preprocessing | Train 36,168 x 51; test 9,043 x 51. 0 `NaN` in both. |
-
-**Remaining blocker.** Instructor approval of the dataset is not documented in the repository. Everything else in this report was computed and checked from the data.
 
 ---
 

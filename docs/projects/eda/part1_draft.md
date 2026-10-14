@@ -7,8 +7,6 @@
 
 # Classification EDA - Part 1 draft (stages 0-3)
 
-> **Status: PENDING INSTRUCTOR APPROVAL.** The repository contains no record of instructor approval for this dataset. The proposal and all EDA below are provisional until approval is documented.
->
 > Scope: this file is Part 1 only (proposal and stages 0-3). Stages 4-5 and the final `index.md` are owned by the second team member, who will integrate this draft.
 
 ---
@@ -23,7 +21,7 @@
 | Target | `y`: did the client subscribe to a term deposit? (`yes` / `no`, binary) |
 | Features (original) | **7 numerical**, **9 categorical** (verified from the data, see 1A) |
 | Features (after excluding `duration`) | **6 numerical**, **9 categorical** = 15 predictors |
-| Approval status | **Pending.** No approval evidence exists in the repository. |
+| Approval status | **Approved** by the instructor. |
 
 **Motivation.** Direct-marketing calls are expensive, and only 11.70% of the contacted clients in this dataset subscribed. A classifier that ranks clients by their chance of subscribing *before* a call is made could help the bank prioritise calls. The dataset is real (a Portuguese bank, May 2008 to November 2010), well documented, and has a mix of numerical and categorical features and a clear binary target, so it fits a classification EDA.
 
