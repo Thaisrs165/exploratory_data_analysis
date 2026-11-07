@@ -1,0 +1,375 @@
+{
+  "threshold": 0.7235483527183533,
+  "subgroups": [
+    {
+      "group_col": "month",
+      "level": "mar",
+      "n": 86,
+      "error_rate": 0.46511627906976744,
+      "actual_positive_rate": 0.5697674418604651,
+      "recall_1": 0.9183673469387755
+    },
+    {
+      "group_col": "month",
+      "level": "oct",
+      "n": 146,
+      "error_rate": 0.4452054794520548,
+      "actual_positive_rate": 0.4383561643835616,
+      "recall_1": 0.90625
+    },
+    {
+      "group_col": "month",
+      "level": "sep",
+      "n": 128,
+      "error_rate": 0.4375,
+      "actual_positive_rate": 0.5078125,
+      "recall_1": 0.8923076923076924
+    },
+    {
+      "group_col": "month",
+      "level": "dec",
+      "n": 36,
+      "error_rate": 0.3888888888888889,
+      "actual_positive_rate": 0.4444444444444444,
+      "recall_1": 1.0
+    },
+    {
+      "group_col": "poutcome",
+      "level": "success",
+      "n": 306,
+      "error_rate": 0.3333333333333333,
+      "actual_positive_rate": 0.6503267973856209,
+      "recall_1": 1.0
+    },
+    {
+      "group_col": "job",
+      "level": "student",
+      "n": 180,
+      "error_rate": 0.3277777777777778,
+      "actual_positive_rate": 0.2777777777777778,
+      "recall_1": 0.68
+    },
+    {
+      "group_col": "job",
+      "level": "retired",
+      "n": 452,
+      "error_rate": 0.2676991150442478,
+      "actual_positive_rate": 0.22123893805309736,
+      "recall_1": 0.7
+    },
+    {
+      "group_col": "month",
+      "level": "apr",
+      "n": 538,
+      "error_rate": 0.22304832713754646,
+      "actual_positive_rate": 0.20260223048327136,
+      "recall_1": 0.6972477064220184
+    },
+    {
+      "group_col": "job",
+      "level": "unknown",
+      "n": 54,
+      "error_rate": 0.2222222222222222,
+      "actual_positive_rate": 0.1111111111111111,
+      "recall_1": 0.3333333333333333
+    },
+    {
+      "group_col": "poutcome",
+      "level": "other",
+      "n": 355,
+      "error_rate": 0.21971830985915494,
+      "actual_positive_rate": 0.17464788732394365,
+      "recall_1": 0.5967741935483871
+    },
+    {
+      "group_col": "poutcome",
+      "level": "failure",
+      "n": 1012,
+      "error_rate": 0.17094861660079053,
+      "actual_positive_rate": 0.1383399209486166,
+      "recall_1": 0.45714285714285713
+    },
+    {
+      "group_col": "month",
+      "level": "feb",
+      "n": 571,
+      "error_rate": 0.15586690017513136,
+      "actual_positive_rate": 0.16112084063047286,
+      "recall_1": 0.5978260869565217
+    },
+    {
+      "group_col": "job",
+      "level": "unemployed",
+      "n": 279,
+      "error_rate": 0.15412186379928317,
+      "actual_positive_rate": 0.15770609318996415,
+      "recall_1": 0.5454545454545454
+    },
+    {
+      "group_col": "job",
+      "level": "management",
+      "n": 1947,
+      "error_rate": 0.13559322033898305,
+      "actual_positive_rate": 0.1335387776065742,
+      "recall_1": 0.5115384615384615
+    },
+    {
+      "group_col": "job",
+      "level": "admin.",
+      "n": 1030,
+      "error_rate": 0.1262135922330097,
+      "actual_positive_rate": 0.11844660194174757,
+      "recall_1": 0.5
+    },
+    {
+      "group_col": "job",
+      "level": "self-employed",
+      "n": 336,
+      "error_rate": 0.125,
+      "actual_positive_rate": 0.13392857142857142,
+      "recall_1": 0.4
+    },
+    {
+      "group_col": "month",
+      "level": "nov",
+      "n": 827,
+      "error_rate": 0.11970979443772672,
+      "actual_positive_rate": 0.10519951632406288,
+      "recall_1": 0.26436781609195403
+    },
+    {
+      "group_col": "month",
+      "level": "jun",
+      "n": 1104,
+      "error_rate": 0.11684782608695653,
+      "actual_positive_rate": 0.09510869565217392,
+      "recall_1": 0.5428571428571428
+    },
+    {
+      "group_col": "month",
+      "level": "jan",
+      "n": 284,
+      "error_rate": 0.11619718309859155,
+      "actual_positive_rate": 0.09859154929577464,
+      "recall_1": 0.35714285714285715
+    },
+    {
+      "group_col": "job",
+      "level": "technician",
+      "n": 1529,
+      "error_rate": 0.1131458469587966,
+      "actual_positive_rate": 0.1157619359058208,
+      "recall_1": 0.519774011299435
+    },
+    {
+      "group_col": "month",
+      "level": "aug",
+      "n": 1261,
+      "error_rate": 0.11260904044409199,
+      "actual_positive_rate": 0.1134020618556701,
+      "recall_1": 0.3356643356643357
+    },
+    {
+      "group_col": "poutcome",
+      "level": "unknown",
+      "n": 7370,
+      "error_rate": 0.09932157394843961,
+      "actual_positive_rate": 0.08914518317503392,
+      "recall_1": 0.3287671232876712
+    },
+    {
+      "group_col": "job",
+      "level": "housemaid",
+      "n": 227,
+      "error_rate": 0.08370044052863436,
+      "actual_positive_rate": 0.10572687224669604,
+      "recall_1": 0.375
+    },
+    {
+      "group_col": "job",
+      "level": "services",
+      "n": 806,
+      "error_rate": 0.08312655086848635,
+      "actual_positive_rate": 0.0880893300248139,
+      "recall_1": 0.36619718309859156
+    },
+    {
+      "group_col": "month",
+      "level": "jul",
+      "n": 1358,
+      "error_rate": 0.08026509572901326,
+      "actual_positive_rate": 0.08394698085419734,
+      "recall_1": 0.2631578947368421
+    },
+    {
+      "group_col": "job",
+      "level": "entrepreneur",
+      "n": 301,
+      "error_rate": 0.07308970099667775,
+      "actual_positive_rate": 0.07308970099667775,
+      "recall_1": 0.18181818181818182
+    },
+    {
+      "group_col": "job",
+      "level": "blue-collar",
+      "n": 1902,
+      "error_rate": 0.06992639327024185,
+      "actual_positive_rate": 0.07202944269190326,
+      "recall_1": 0.31386861313868614
+    },
+    {
+      "group_col": "month",
+      "level": "may",
+      "n": 2704,
+      "error_rate": 0.06989644970414201,
+      "actual_positive_rate": 0.06878698224852071,
+      "recall_1": 0.21505376344086022
+    }
+  ],
+  "worst_examples": [
+    {
+      "poutcome": "success",
+      "month": "dec",
+      "job": "services",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.990687906742096,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "sep",
+      "job": "retired",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9899376630783081,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "sep",
+      "job": "admin.",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9878818988800049,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "feb",
+      "job": "student",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9873530864715576,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "feb",
+      "job": "student",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9852867126464844,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "sep",
+      "job": "admin.",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9847434759140015,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "jun",
+      "job": "student",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9843617677688599,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "jan",
+      "job": "management",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.982524573802948,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "success",
+      "month": "jun",
+      "job": "management",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9823442697525024,
+      "error_type": "false_positive"
+    },
+    {
+      "poutcome": "unknown",
+      "month": "feb",
+      "job": "unknown",
+      "actual": 0,
+      "pred": 1,
+      "proba": 0.9818183779716492,
+      "error_type": "false_positive"
+    }
+  ],
+  "permutation_importance": {
+    "day": 0.05768421393597658,
+    "poutcome_success": 0.052022957287962225,
+    "contact_unknown": 0.042422107439431575,
+    "month_feb": 0.017072462995198056,
+    "previous": 0.013541735250004266,
+    "poutcome_failure": 0.012188892039814108,
+    "month_aug": 0.01201597764813921,
+    "month_nov": 0.01136429207639445,
+    "month_oct": 0.01131422757705331,
+    "month_apr": 0.010542229840704331,
+    "housing_yes": 0.008465134014944874,
+    "contact_cellular": 0.0084534258228938,
+    "month_may": 0.00819635650259406,
+    "month_mar": 0.00811183453148403,
+    "month_jul": 0.0068669179106341125,
+    "month_jan": 0.006760439952770381,
+    "balance": 0.006738647602047498,
+    "campaign": 0.005410066513282119,
+    "month_jun": 0.005154134276300104,
+    "pdays": 0.004908408726309893,
+    "missingindicator_pdays": 0.004840897862054117,
+    "poutcome_unknown": 0.004811366362406056,
+    "month_sep": 0.0025102138102855555,
+    "loan_no": 0.002274045155352561,
+    "education_tertiary": 0.002200145292154543,
+    "housing_no": 0.002187507534752281,
+    "marital_married": 0.002009072618976876,
+    "month_dec": 0.0014575467911556895,
+    "education_secondary": 0.0013826404298575234,
+    "marital_single": 0.0013773168754145026,
+    "job_management": 0.0012520947113440818,
+    "loan_yes": 0.0010875881648178376,
+    "default_yes": 0.0009946237992188578,
+    "marital_divorced": 0.0009878219721386305,
+    "education_unknown": 0.0007022445813872569,
+    "job_unemployed": 0.0006232070398689893,
+    "age": 0.00043684409239171383,
+    "contact_telephone": 0.00038192547923759923,
+    "poutcome_other": 0.0003732550142002966,
+    "job_blue-collar": 0.0003250323389010379,
+    "job_technician": 0.00029824926310828006,
+    "job_admin.": 0.00029676675648550034,
+    "education_primary": 0.00010466419318792552,
+    "job_housemaid": -1.4607183977038974e-05,
+    "default_no": -3.700550019161697e-05,
+    "job_student": -5.8553142810918724e-05,
+    "job_self-employed": -8.961161975589715e-05,
+    "job_services": -0.0003228361266943036,
+    "job_entrepreneur": -0.0004381819793017494,
+    "job_retired": -0.0007462636119811128,
+    "job_unknown": -0.0009558026911671791
+  },
+  "base_test_pr_auc": 0.4354865901568911
+}

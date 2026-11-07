@@ -1,0 +1,18 @@
+{
+  "architecture": "22->[32, 16]->1",
+  "n_params": 1281,
+  "n_train_rows": 5609,
+  "rows_per_param": 4.378610460577674,
+  "best_epoch": 264,
+  "stopped_epoch": 284,
+  "val_metrics": {
+    "mae": 122.78122344034136,
+    "rmse": 180.5053646787437,
+    "r2": 0.9302552918649001,
+    "mape": 64.91545860254688
+  },
+  "train_loss_at_best": 8.522105640684098,
+  "val_loss_at_best": 12.173849105834961,
+  "train_loss_final": 8.17902059702976,
+  "val_loss_final": 11.879066467285156
+}

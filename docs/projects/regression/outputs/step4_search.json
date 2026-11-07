@@ -1,0 +1,130 @@
+[
+  {
+    "name": "wider [64, 32] (no reg.)",
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "dropout": 0.0,
+    "batchnorm": false,
+    "weight_decay": 0.0,
+    "best_epoch": 194,
+    "stopped_epoch": 214,
+    "mae": 109.69462617524614,
+    "rmse": 167.30364037187,
+    "r2": 0.9400841375069622,
+    "mape": 57.6444315819598
+  },
+  {
+    "name": "baseline (no reg.)",
+    "hidden_sizes": [
+      32,
+      16
+    ],
+    "dropout": 0.0,
+    "batchnorm": false,
+    "weight_decay": 0.0,
+    "best_epoch": 264,
+    "stopped_epoch": 284,
+    "mae": 122.78122344034136,
+    "rmse": 180.5053646787437,
+    "r2": 0.9302552918649001,
+    "mape": 64.91545860254688
+  },
+  {
+    "name": "+ batchnorm",
+    "hidden_sizes": [
+      32,
+      16
+    ],
+    "dropout": 0.0,
+    "batchnorm": true,
+    "weight_decay": 0.0,
+    "best_epoch": 101,
+    "stopped_epoch": 121,
+    "mae": 122.78861916866032,
+    "rmse": 185.9706726611208,
+    "r2": 0.9259679189812322,
+    "mape": 61.6718744148797
+  },
+  {
+    "name": "+ weight decay 1e-4",
+    "hidden_sizes": [
+      32,
+      16
+    ],
+    "dropout": 0.0,
+    "batchnorm": false,
+    "weight_decay": 0.0001,
+    "best_epoch": 264,
+    "stopped_epoch": 284,
+    "mae": 130.4534376783503,
+    "rmse": 189.83790849107126,
+    "r2": 0.9228569306447187,
+    "mape": 64.25099742364266
+  },
+  {
+    "name": "wider [64, 32] + dropout 0.2 + weight decay 1e-4",
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "dropout": 0.2,
+    "batchnorm": false,
+    "weight_decay": 0.0001,
+    "best_epoch": 207,
+    "stopped_epoch": 227,
+    "mae": 139.97217821530455,
+    "rmse": 223.26661794330718,
+    "r2": 0.8932965108184328,
+    "mape": 58.96621231965482
+  },
+  {
+    "name": "+ batchnorm + dropout 0.2",
+    "hidden_sizes": [
+      32,
+      16
+    ],
+    "dropout": 0.2,
+    "batchnorm": true,
+    "weight_decay": 0.0,
+    "best_epoch": 122,
+    "stopped_epoch": 142,
+    "mae": 148.40243228174566,
+    "rmse": 242.13796622219533,
+    "r2": 0.8744962177168774,
+    "mape": 57.15178013693119
+  },
+  {
+    "name": "+ dropout 0.2",
+    "hidden_sizes": [
+      32,
+      16
+    ],
+    "dropout": 0.2,
+    "batchnorm": false,
+    "weight_decay": 0.0,
+    "best_epoch": 195,
+    "stopped_epoch": 215,
+    "mae": 167.6379895276241,
+    "rmse": 266.78336349534334,
+    "r2": 0.8476478733254479,
+    "mape": 70.7886286597584
+  },
+  {
+    "name": "+ dropout 0.2 + weight decay 1e-4",
+    "hidden_sizes": [
+      32,
+      16
+    ],
+    "dropout": 0.2,
+    "batchnorm": false,
+    "weight_decay": 0.0001,
+    "best_epoch": 195,
+    "stopped_epoch": 215,
+    "mae": 168.4185862757603,
+    "rmse": 267.936297767632,
+    "r2": 0.8463282142890539,
+    "mape": 71.67077332367072
+  }
+]

@@ -1,6 +1,6 @@
 # Exploratory Data Analysis — 2026.2
 
-Project for Insper's **Artificial Neural Networks and Deep Learning**, semester 2026.2: an exploratory data analysis (EDA) and preprocessing pipeline that prepares tabular data for a neural network. We did it for both tasks: a **classification** dataset and a **regression** dataset. No model is trained here; each report ends with a synthesis for whoever builds the model.
+Project for Insper's **Artificial Neural Networks and Deep Learning**, semester 2026.2, in three deliverables on the same team and datasets: an exploratory data analysis (EDA) and preprocessing pipeline for both a **classification** and a **regression** dataset, followed by a neural network built on top of each pipeline.
 
 ## Team
 
@@ -60,7 +60,37 @@ Project for Insper's **Artificial Neural Networks and Deep Learning**, semester 
 
 </div>
 
-Both reports follow the same stages from the assignment. Each stage is its own page (use the tabs at the top and **Next** at the bottom of each page), and each report is also available on a single page:
+## The models
+
+Both EDA pipelines, built on in the same way: a from-scratch-configured PyTorch MLP, trivial/linear/random-forest baselines, an 8-configuration regularization search, a test set touched exactly once (3 seeds), and error analysis cross-checked against the EDA's own findings.
+
+<div class="grid cards" markdown>
+
+-   **[Regression model — bike demand](projects/regression/index.md)**
+
+    ---
+
+    A 2-hidden-layer MLP (22 → 64 → 32 → 1) predicting `sqrt(rented_bike_count)` beats the mandatory linear baseline's test MAE by 53%, and matches an optional random-forest baseline at a fraction of the parameters.
+
+    - Honest negative result: dropout, weight decay and batch norm all **hurt** validation performance here
+    - Error analysis matches the EDA's own top correlates (temperature, hour)
+
+    [:octicons-arrow-right-24: Read the report](projects/regression/index.md)
+
+-   **[Classification model — term deposit subscription](projects/classification/index.md)**
+
+    ---
+
+    A 2-hidden-layer MLP (51 → 32 → 16 → 1) beats the mandatory Logistic Regression baseline on every metric, but falls just short of its 15% PR-AUC success criterion and trails an optional random-forest baseline.
+
+    - Honest negative result: only a 6.4% PR-AUC gain over Logistic Regression (criterion: ≥ 15%) — here dropout **helps**, the opposite of the regression track
+    - Error analysis flags a possible data-collection confound (`day`) the EDA had already warned about
+
+    [:octicons-arrow-right-24: Read the report](projects/classification/index.md)
+
+</div>
+
+Both EDA reports follow the same stages from the assignment. Each stage is its own page (use the tabs at the top and **Next** at the bottom of each page), and each report is also available on a single page:
 
 | Stage | Content |
 |---|---|
@@ -75,10 +105,12 @@ Both reports follow the same stages from the assignment. Each stage is its own p
 
 Everything on this site is generated from the code in the [repository](https://github.com/Thaisrs165/exploratory_data_analysis):
 
-| Part | Pipeline (importable) | Analysis scripts |
+| Part | Pipeline (importable) | Analysis / model scripts |
 |---|---|---|
-| Classification | `code/bank_preprocessing.py` | `scripts/part1_eda.py`, `scripts/part2_eda.py` |
-| Regression | `code/bike_preprocessing.py` | `scripts/regression_eda.py` |
+| Classification EDA | `code/bank_preprocessing.py` | `scripts/part1_eda.py`, `scripts/part2_eda.py` |
+| Regression EDA | `code/bike_preprocessing.py` | `scripts/regression_eda.py` |
+| Regression model | `code/regression_common.py`, `code/regression_model.py` | `code/regression_baselines.py`, `code/regression_training.py`, `code/regression_search.py`, `code/regression_test_eval.py`, `code/regression_error_analysis.py` |
+| Classification model | `code/classification_common.py`, `code/classification_model.py` | `code/classification_baselines.py`, `code/classification_training.py`, `code/classification_search.py`, `code/classification_test_eval.py`, `code/classification_error_analysis.py` |
 
 ## Running locally
 
