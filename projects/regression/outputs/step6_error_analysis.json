@@ -1,0 +1,185 @@
+{
+  "subgroups": [
+    {
+      "group_col": "holiday",
+      "level": "Holiday",
+      "n": 72,
+      "mae": 193.49131330755836
+    },
+    {
+      "group_col": "seasons",
+      "level": "Summer",
+      "n": 456,
+      "mae": 178.34958661815182
+    },
+    {
+      "group_col": "precipitation",
+      "level": "rain",
+      "n": 147,
+      "mae": 146.2725674694767
+    },
+    {
+      "group_col": "seasons",
+      "level": "Spring",
+      "n": 432,
+      "mae": 139.77736878209063
+    },
+    {
+      "group_col": "seasons",
+      "level": "Autumn",
+      "n": 384,
+      "mae": 130.1299811715658
+    },
+    {
+      "group_col": "precipitation",
+      "level": "dry",
+      "n": 1472,
+      "mae": 129.41586494900767
+    },
+    {
+      "group_col": "holiday",
+      "level": "No Holiday",
+      "n": 1632,
+      "mae": 124.30278272695172
+    },
+    {
+      "group_col": "seasons",
+      "level": "Winter",
+      "n": 432,
+      "mae": 58.130482377101266
+    },
+    {
+      "group_col": "precipitation",
+      "level": "snow",
+      "n": 85,
+      "mae": 56.368180536200455
+    }
+  ],
+  "worst_examples": [
+    {
+      "seasons": "Spring",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 19,
+      "temperature": 22.3,
+      "actual": 477.0,
+      "predicted": 1728.520020480515,
+      "abs_error": 1251.520020480515
+    },
+    {
+      "seasons": "Summer",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 8,
+      "temperature": 20.7,
+      "actual": 959.0,
+      "predicted": 2185.6245617503882,
+      "abs_error": 1226.6245617503882
+    },
+    {
+      "seasons": "Summer",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 19,
+      "temperature": 25.7,
+      "actual": 1058.0,
+      "predicted": 2282.5141932526603,
+      "abs_error": 1224.5141932526603
+    },
+    {
+      "seasons": "Spring",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 16,
+      "temperature": 19.1,
+      "actual": 103.0,
+      "predicted": 1326.3526368686144,
+      "abs_error": 1223.3526368686144
+    },
+    {
+      "seasons": "Summer",
+      "precipitation": "rain",
+      "holiday": "No Holiday",
+      "hour": 21,
+      "temperature": 22.4,
+      "actual": 225.0,
+      "predicted": 1443.2521110235248,
+      "abs_error": 1218.2521110235248
+    },
+    {
+      "seasons": "Spring",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 14,
+      "temperature": 20.7,
+      "actual": 384.0,
+      "predicted": 1577.3560793548822,
+      "abs_error": 1193.3560793548822
+    },
+    {
+      "seasons": "Summer",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 17,
+      "temperature": 24.1,
+      "actual": 403.0,
+      "predicted": 1441.3032926903688,
+      "abs_error": 1038.3032926903688
+    },
+    {
+      "seasons": "Summer",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 15,
+      "temperature": 25.5,
+      "actual": 2288.0,
+      "predicted": 1260.4385141292587,
+      "abs_error": 1027.5614858707413
+    },
+    {
+      "seasons": "Autumn",
+      "precipitation": "dry",
+      "holiday": "Holiday",
+      "hour": 15,
+      "temperature": 24.1,
+      "actual": 2200.0,
+      "predicted": 1172.4746334530064,
+      "abs_error": 1027.5253665469936
+    },
+    {
+      "seasons": "Summer",
+      "precipitation": "dry",
+      "holiday": "No Holiday",
+      "hour": 8,
+      "temperature": 24.4,
+      "actual": 578.0,
+      "predicted": 1527.179458582672,
+      "abs_error": 949.1794585826719
+    }
+  ],
+  "permutation_importance": {
+    "hour_sin": 392.15820768031483,
+    "hour_cos": 320.5444069442436,
+    "temperature": 238.07719915945395,
+    "seasons_Summer": 191.6498129018243,
+    "solar_radiation": 166.3602537358799,
+    "seasons_Autumn": 127.62986200081491,
+    "humidity": 105.48662935889979,
+    "day_of_week_Fri": 98.74312490409238,
+    "day_of_week_Mon": 89.5502270644153,
+    "day_of_week_Thu": 79.77410694016181,
+    "rainfall": 79.17383994468321,
+    "day_of_week_Tue": 78.87050430023675,
+    "seasons_Winter": 77.81092627837664,
+    "seasons_Spring": 77.28054707428322,
+    "day_of_week_Wed": 76.86618091357397,
+    "day_of_week_Sat": 67.75676318495235,
+    "day_of_week_Sun": 36.524711666516374,
+    "snowfall": 18.369440515779786,
+    "visibility": 12.314649256743444,
+    "holiday_Holiday": 10.560181587848138,
+    "wind_speed": 5.25081074037732,
+    "holiday_No Holiday": 4.1753230349947374
+  },
+  "base_test_rmse": 205.3801722806888
+}

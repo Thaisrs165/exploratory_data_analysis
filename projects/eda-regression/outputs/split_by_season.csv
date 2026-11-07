@@ -1,0 +1,5 @@
+seasons,train_rows,test_rows,train_pct,test_pct,train_mean_target,test_mean_target
+Winter,1728,432,25.5583,25.3521,222.9832,235.7731
+Spring,1728,432,25.5583,25.3521,759.1753,694.5694
+Summer,1752,456,25.9133,26.7606,1026.0936,1064.7325
+Autumn,1553,384,22.9700,22.5352,932.3316,890.8620

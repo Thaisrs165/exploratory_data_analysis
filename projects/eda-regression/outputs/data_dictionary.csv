@@ -1,0 +1,16 @@
+column,dtype,n_unique,unit
+date,datetime64[ns],365,
+rented_bike_count,int64,2166,bikes/h
+hour,int64,24,h
+temperature,float64,546,°C
+humidity,int64,90,%
+wind_speed,float64,65,m/s
+visibility,int64,1789,10 m
+dew_point,float64,556,°C
+solar_radiation,float64,345,MJ/m²
+rainfall,float64,61,mm
+snowfall,float64,51,cm
+seasons,object,4,
+holiday,object,2,
+functioning_day,object,2,
+day_of_week,object,7,

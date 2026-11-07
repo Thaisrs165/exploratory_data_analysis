@@ -1,0 +1,18 @@
+column,meaning,role,pandas dtype,unit,observed values / range,Part 1 status
+age,Client age,numerical,int64,years,18 to 95,retained
+job,Type of job,categorical,object,-,"`admin.`, `blue-collar`, `entrepreneur`, `housemaid`, `management`, `retired`, `self-employed`, `services`, `student`, `technician`, `unemployed`, `unknown`",retained
+marital,Marital status (`divorced` = divorced or widowed),categorical,object,-,"`divorced`, `married`, `single`",retained
+education,Education level,categorical,object,-,"`primary`, `secondary`, `tertiary`, `unknown`",retained
+default,Has credit in default?,categorical,object,-,"`no`, `yes`",retained
+balance,Average yearly balance,numerical,int64,euros,"-8,019 to 102,127",retained
+housing,Has housing loan?,categorical,object,-,"`no`, `yes`",retained
+loan,Has personal loan?,categorical,object,-,"`no`, `yes`",retained
+contact,"Contact communication type (last contact, current campaign)",categorical,object,-,"`cellular`, `telephone`, `unknown`",retained
+day,Day of month of the last contact,numerical,int64,day (1-31),1 to 31,retained
+month,Month of year of the last contact,categorical,object,-,"`jan`, `feb`, `mar`, `apr`, `may`, `jun`, `jul`, `aug`, `sep`, `oct`, `nov`, `dec`",retained
+duration,Duration of the last contact,numerical,int64,seconds,"0 to 4,918",excluded (leakage)
+campaign,"Contacts performed during this campaign for this client, incl. the last one",numerical,int64,count,1 to 63,retained
+pdays,Days since the client was last contacted in a previous campaign; -1 = not previously contacted,numerical,int64,days,-1 to 871,retained
+previous,Contacts performed before this campaign for this client,numerical,int64,count,0 to 275,retained
+poutcome,Outcome of the previous marketing campaign,categorical,object,-,"`failure`, `other`, `success`, `unknown`",retained
+y,Target: has the client subscribed to a term deposit?,target,object,-,"`no`, `yes`",target
